@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s4.HomeView.HomeViewController">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home &gt;" />
+                  <Text fx:id="departmentTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
+                <Button mnemonicParsing="false" text="Logout" />
+              </items>
+            </ToolBar>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                  <ComboBox fx:id="plansBox" prefWidth="150.0" promptText="Plans" />
+                  <Button fx:id="statusButton" mnemonicParsing="false" text="Set Status" />
+                <Button fx:id="editButton" mnemonicParsing="false" text="Edit/View" />
+                  <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="cloneButton" mnemonicParsing="false" text="Clone" />
+                  <Button fx:id="newUserButton" mnemonicParsing="false" text="New User" />
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <TableView fx:id="plan_table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      </TableView>
+   </center>
+</BorderPane>

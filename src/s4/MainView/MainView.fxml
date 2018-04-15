@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s4.MainView.MainViewController">
+   <center>
+      <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="313.0" fitWidth="382.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Sprint2Base/src/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <PasswordField fx:id="passField" layoutX="42.0" layoutY="109.0" promptText="Password" />
+                  <RadioButton fx:id="radioLocalHost" layoutX="28.0" layoutY="151.0" mnemonicParsing="false" text="Localhost" />
+                  <RadioButton fx:id="radioForeignHost" layoutX="117.0" layoutY="151.0" mnemonicParsing="false" text="Foreign Host" />
+                  <TextField fx:id="userField" layoutX="42.0" layoutY="67.0" promptText="Username" />
+                  <TextField fx:id="foreginHostname" layoutX="43.0" layoutY="187.0" promptText="Foreign host name" />
+                  <Button layoutX="92.0" layoutY="231.0" mnemonicParsing="false" onAction="#login" text="Login" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
