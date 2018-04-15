@@ -56,6 +56,23 @@ public class EditViewController
 
 	}
 
+	private void hide()
+	{
+		textArea.setVisible(false);
+		entityTitleField.setVisible(false);
+		changeTitleButton.setVisible(false);
+		saveStatementButton.setVisible(false);
+		addCompButton.setVisible(false);
+		delCompButton.setVisible(false);
+		
+		/// this is how the plan component visual display is organized
+		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(client.business.entity);
+		// make the tree always fully expanded for convienence
+		first.setExpanded(true);
+		// the view
+		tree.setRoot(showPlan(client.business.entity.getSubentity(0), first));
+	}
+
 	public void setUp()
 	{
 		BP_Node currentNode = client.business;
@@ -66,6 +83,7 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
+		
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(plan);
 		// make the tree always fully expanded for convienence
@@ -92,13 +110,20 @@ public class EditViewController
 		saveStatementButton.setVisible(true);
 		addCompButton.setVisible(true);
 		delCompButton.setVisible(true);
-		// set up 
-		textArea.setText(newValue.getValue().getStatement(0).getStatement());
-		entityTitleField.setText(newValue.getValue().getEntityTitle());
-		changeTitleButton.setOnAction(e -> changeETitle(newValue, entityTitleField.getText()));
-		saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
-		addCompButton.setOnAction(e -> addComp(newValue));
-		delCompButton.setOnAction(e -> delComp(newValue));
+		// set up
+		if (newValue != null)
+		{
+			textArea.setText(newValue.getValue().getStatement(0).getStatement());
+			entityTitleField.setText(newValue.getValue().getEntityTitle());
+			changeTitleButton.setOnAction(e -> changeETitle(newValue, entityTitleField.getText()));
+			saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
+			addCompButton.setOnAction(e -> addComp(newValue));
+			delCompButton.setOnAction(e -> delComp(newValue));
+		}
+		else
+		{
+			hide();
+		}
 	}
 
 	private void delComp(TreeItem<BusinessEntity> newValue)
@@ -113,7 +138,7 @@ public class EditViewController
 		}
 		client.proxy.writeDisk();
 		client.proxy.readDisk();
-		setUp();
+		hide();
 	}
 
 	private void addComp(TreeItem<BusinessEntity> newValue)
@@ -127,7 +152,7 @@ public class EditViewController
 		client.business.entity = getHead(plan);
 		client.proxy.writeDisk();
 		client.proxy.readDisk();
-		setUp();
+		hide();
 	}
 
 	/// this returns the top of the business plan given a node anywher in the tree
@@ -146,7 +171,7 @@ public class EditViewController
 		current.getStatement(0).setStatement(text);
 		client.proxy.writeDisk();
 		client.proxy.readDisk();
-		setUp();
+		hide();
 	}
 
 	private void changeETitle(TreeItem<BusinessEntity> newValue, String text)
@@ -155,7 +180,7 @@ public class EditViewController
 		current.setEntityTitle(text);
 		client.proxy.writeDisk();
 		client.proxy.readDisk();
-		setUp();
+		hide();
 	}
 
 	/// returns the businessEntity being edited, to know which entity to make
