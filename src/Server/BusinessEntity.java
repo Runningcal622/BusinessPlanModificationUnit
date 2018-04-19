@@ -18,6 +18,7 @@ public class BusinessEntity implements Serializable
 	int component_number;
 	// This must be public for serialization to work
 	public EntityFactory subentityFactory;
+	String sentence;
 
 	public BusinessEntity(String entityTitle, ArrayList<EntityStatement> statements,
 			ArrayList<BusinessEntity> subentities, BusinessEntity parentEntity, EntityFactory subentityFactory)
@@ -30,7 +31,30 @@ public class BusinessEntity implements Serializable
 		this.subentityFactory = subentityFactory;
 		tree_level = 0;
 		component_number = 0;
+		this.sentence = statements.get(0).getStatement();
 	}
+
+	
+	
+	/**
+	 * @return the sentence
+	 */
+	public String getSentence()
+	{
+		return sentence;
+	}
+
+
+
+	/**
+	 * @param sentence the sentence to set
+	 */
+	public void setSentence(String sentence)
+	{
+		this.sentence = sentence;
+	}
+
+
 
 	// Need a default constructor for serialization
 	public BusinessEntity()
@@ -133,8 +157,8 @@ public class BusinessEntity implements Serializable
 	public int getTreeItemID()
 	{
 		String id_string = Integer.toString(tree_level) + Integer.toString(component_number);
-		System.out.println(tree_level);
-		System.out.println(component_number);
+		//System.out.println(tree_level);
+		//System.out.println(component_number);
 		return Integer.parseInt(id_string);
 	}
 

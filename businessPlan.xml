@@ -10,14 +10,14 @@
       <string>subentityFactory</string>
       <void method="set">
        <object idref="BusinessEntity0"/>
-       <object class="Server.EntityFactory" id="EntityFactory0">
+       <object class="Server.EntityFactory">
         <void property="defaultStatements">
          <object class="java.util.ArrayList" id="ArrayList0">
           <void method="add">
            <object class="Server.EntityStatement">
             <void property="date">
              <object class="java.util.Date">
-              <long>1523757551400</long>
+              <long>1524168273764</long>
              </object>
             </void>
             <void property="name">
@@ -39,13 +39,16 @@
      <void property="entityTitle">
       <string>Centre Plan Title</string>
      </void>
+     <void property="sentence">
+      <string>Enter description of the plan.</string>
+     </void>
      <void property="statements">
       <object class="java.util.ArrayList">
        <void method="add">
-        <object class="Server.EntityStatement" id="EntityStatement0">
+        <object class="Server.EntityStatement">
          <void property="date">
           <object class="java.util.Date">
-           <long>1523757551400</long>
+           <long>1524168273764</long>
           </object>
          </void>
          <void property="name">
@@ -66,14 +69,14 @@
           <string>subentityFactory</string>
           <void method="set">
            <object idref="BusinessEntity1"/>
-           <object class="Server.EntityFactory">
+           <object class="Server.EntityFactory" id="EntityFactory0">
             <void property="defaultStatements">
              <object class="java.util.ArrayList" id="ArrayList1">
               <void method="add">
                <object class="Server.EntityStatement">
                 <void property="date">
                  <object class="java.util.Date">
-                  <long>1523757551400</long>
+                  <long>1524168273764</long>
                  </object>
                 </void>
                 <void property="name">
@@ -88,7 +91,7 @@
                <object class="Server.EntityStatement">
                 <void property="date">
                  <object class="java.util.Date">
-                  <long>1523757551400</long>
+                  <long>1524168273764</long>
                  </object>
                 </void>
                 <void property="name">
@@ -111,32 +114,10 @@
           <string>Centre Mission Statement</string>
          </void>
          <void property="parentEntity">
-          <object class="Server.BusinessEntity" id="BusinessEntity2">
-           <void class="Server.BusinessEntity" method="getField">
-            <string>subentityFactory</string>
-            <void method="set">
-             <object idref="BusinessEntity2"/>
-             <object idref="EntityFactory0"/>
-            </void>
-           </void>
-           <void property="entityTitle">
-            <string>Centre Plan Title</string>
-           </void>
-           <void property="statements">
-            <object class="java.util.ArrayList">
-             <void method="add">
-              <object idref="EntityStatement0"/>
-             </void>
-            </object>
-           </void>
-           <void property="subentities">
-            <object class="java.util.ArrayList">
-             <void method="add">
-              <object idref="BusinessEntity1"/>
-             </void>
-            </object>
-           </void>
-          </object>
+          <object idref="BusinessEntity0"/>
+         </void>
+         <void property="sentence">
+          <string>Enter in an Institutional Mission Statement!</string>
          </void>
          <void property="statements">
           <object idref="ArrayList0"/>
@@ -144,19 +125,19 @@
          <void property="subentities">
           <object class="java.util.ArrayList">
            <void method="add">
-            <object class="Server.BusinessEntity" id="BusinessEntity3">
+            <object class="Server.BusinessEntity" id="BusinessEntity2">
              <void class="Server.BusinessEntity" method="getField">
               <string>subentityFactory</string>
               <void method="set">
-               <object idref="BusinessEntity3"/>
-               <object class="Server.EntityFactory">
+               <object idref="BusinessEntity2"/>
+               <object class="Server.EntityFactory" id="EntityFactory1">
                 <void property="defaultStatements">
                  <object class="java.util.ArrayList" id="ArrayList2">
                   <void method="add">
                    <object class="Server.EntityStatement">
                     <void property="date">
                      <object class="java.util.Date">
-                      <long>1523757551400</long>
+                      <long>1524168273764</long>
                      </object>
                     </void>
                     <void property="name">
@@ -181,25 +162,28 @@
              <void property="parentEntity">
               <object idref="BusinessEntity1"/>
              </void>
+             <void property="sentence">
+              <string>Enter in a Name for your Department!</string>
+             </void>
              <void property="statements">
               <object idref="ArrayList1"/>
              </void>
              <void property="subentities">
               <object class="java.util.ArrayList">
                <void method="add">
-                <object class="Server.BusinessEntity" id="BusinessEntity4">
+                <object class="Server.BusinessEntity" id="BusinessEntity3">
                  <void class="Server.BusinessEntity" method="getField">
                   <string>subentityFactory</string>
                   <void method="set">
-                   <object idref="BusinessEntity4"/>
-                   <object class="Server.EntityFactory">
+                   <object idref="BusinessEntity3"/>
+                   <object class="Server.EntityFactory" id="EntityFactory2">
                     <void property="defaultStatements">
                      <object class="java.util.ArrayList" id="ArrayList3">
                       <void method="add">
                        <object class="Server.EntityStatement">
                         <void property="date">
                          <object class="java.util.Date">
-                          <long>1523757551400</long>
+                          <long>1524168273764</long>
                          </object>
                         </void>
                         <void property="name">
@@ -222,7 +206,10 @@
                   <string>Goal</string>
                  </void>
                  <void property="parentEntity">
-                  <object idref="BusinessEntity3"/>
+                  <object idref="BusinessEntity2"/>
+                 </void>
+                 <void property="sentence">
+                  <string>Enter what your Goal is!</string>
                  </void>
                  <void property="statements">
                   <object idref="ArrayList2"/>
@@ -230,19 +217,19 @@
                  <void property="subentities">
                   <object class="java.util.ArrayList">
                    <void method="add">
-                    <object class="Server.BusinessEntity" id="BusinessEntity5">
+                    <object class="Server.BusinessEntity" id="BusinessEntity4">
                      <void class="Server.BusinessEntity" method="getField">
                       <string>subentityFactory</string>
                       <void method="set">
-                       <object idref="BusinessEntity5"/>
-                       <object class="Server.EntityFactory">
+                       <object idref="BusinessEntity4"/>
+                       <object class="Server.EntityFactory" id="EntityFactory3">
                         <void property="defaultStatements">
                          <object class="java.util.ArrayList" id="ArrayList4">
                           <void method="add">
                            <object class="Server.EntityStatement">
                             <void property="date">
                              <object class="java.util.Date">
-                              <long>1523757551400</long>
+                              <long>1524168273764</long>
                              </object>
                             </void>
                             <void property="name">
@@ -257,7 +244,7 @@
                            <object class="Server.EntityStatement">
                             <void property="date">
                              <object class="java.util.Date">
-                              <long>1523757551400</long>
+                              <long>1524168273764</long>
                              </object>
                             </void>
                             <void property="name">
@@ -272,7 +259,7 @@
                            <object class="Server.EntityStatement">
                             <void property="date">
                              <object class="java.util.Date">
-                              <long>1523757551400</long>
+                              <long>1524168273764</long>
                              </object>
                             </void>
                             <void property="name">
@@ -295,7 +282,265 @@
                       <string>SLO</string>
                      </void>
                      <void property="parentEntity">
-                      <object idref="BusinessEntity4"/>
+                      <object idref="BusinessEntity3"/>
+                     </void>
+                     <void property="sentence">
+                      <string>Enter what your Student Learning Objective is!</string>
+                     </void>
+                     <void property="statements">
+                      <object idref="ArrayList3"/>
+                     </void>
+                     <void property="subentities">
+                      <object class="java.util.ArrayList">
+                       <void method="add">
+                        <object class="Server.BusinessEntity">
+                         <void property="entityTitle">
+                          <string>To</string>
+                         </void>
+                         <void property="parentEntity">
+                          <object idref="BusinessEntity4"/>
+                         </void>
+                         <void property="sentence">
+                          <string>Enter a description for your tool!</string>
+                         </void>
+                         <void property="statements">
+                          <object idref="ArrayList4"/>
+                         </void>
+                         <void property="subentities">
+                          <object class="java.util.ArrayList"/>
+                         </void>
+                         <void property="tree_level">
+                          <int>5</int>
+                         </void>
+                        </object>
+                       </void>
+                       <void method="add">
+                        <object class="Server.BusinessEntity">
+                         <void property="component_number">
+                          <int>1</int>
+                         </void>
+                         <void property="entityTitle">
+                          <string>Tool</string>
+                         </void>
+                         <void property="parentEntity">
+                          <object idref="BusinessEntity4"/>
+                         </void>
+                         <void property="sentence">
+                          <string>Enter a for your tool!</string>
+                         </void>
+                         <void property="statements">
+                          <object idref="ArrayList4"/>
+                         </void>
+                         <void property="subentities">
+                          <object class="java.util.ArrayList"/>
+                         </void>
+                         <void property="tree_level">
+                          <int>5</int>
+                         </void>
+                        </object>
+                       </void>
+                      </object>
+                     </void>
+                     <void property="tree_level">
+                      <int>4</int>
+                     </void>
+                    </object>
+                   </void>
+                   <void method="add">
+                    <object class="Server.BusinessEntity" id="BusinessEntity5">
+                     <void class="Server.BusinessEntity" method="getField">
+                      <string>subentityFactory</string>
+                      <void method="set">
+                       <object idref="BusinessEntity5"/>
+                       <object class="Server.EntityFactory">
+                        <void property="defaultStatements">
+                         <object class="java.util.ArrayList">
+                          <void method="add">
+                           <object class="Server.EntityStatement">
+                            <void property="date">
+                             <object class="java.util.Date">
+                              <long>1524169459822</long>
+                             </object>
+                            </void>
+                            <void property="name">
+                             <string>ToolDescription</string>
+                            </void>
+                            <void property="statement">
+                             <string>Enter a description for your tool!</string>
+                            </void>
+                           </object>
+                          </void>
+                          <void method="add">
+                           <object class="Server.EntityStatement">
+                            <void property="date">
+                             <object class="java.util.Date">
+                              <long>1524169459822</long>
+                             </object>
+                            </void>
+                            <void property="name">
+                             <string>ToolTarget</string>
+                            </void>
+                            <void property="statement">
+                             <string>Enter the target of your tool!</string>
+                            </void>
+                           </object>
+                          </void>
+                          <void method="add">
+                           <object class="Server.EntityStatement">
+                            <void property="date">
+                             <object class="java.util.Date">
+                              <long>1524169459822</long>
+                             </object>
+                            </void>
+                            <void property="name">
+                             <string>ToolResult</string>
+                            </void>
+                            <void property="statement">
+                             <string>Enter what the result from your tool will be!</string>
+                            </void>
+                           </object>
+                          </void>
+                         </object>
+                        </void>
+                        <void property="entityTitle">
+                         <string>Tool</string>
+                        </void>
+                       </object>
+                      </void>
+                     </void>
+                     <void property="component_number">
+                      <int>1</int>
+                     </void>
+                     <void property="entityTitle">
+                      <string>SLO</string>
+                     </void>
+                     <void property="parentEntity">
+                      <object idref="BusinessEntity3"/>
+                     </void>
+                     <void property="sentence">
+                      <string>Enter what your Learning Objective is!</string>
+                     </void>
+                     <void property="statements">
+                      <object idref="ArrayList3"/>
+                     </void>
+                     <void property="subentities">
+                      <object class="java.util.ArrayList"/>
+                     </void>
+                     <void property="tree_level">
+                      <int>4</int>
+                     </void>
+                    </object>
+                   </void>
+                  </object>
+                 </void>
+                 <void property="tree_level">
+                  <int>3</int>
+                 </void>
+                </object>
+               </void>
+              </object>
+             </void>
+             <void property="tree_level">
+              <int>2</int>
+             </void>
+            </object>
+           </void>
+          </object>
+         </void>
+         <void property="tree_level">
+          <int>1</int>
+         </void>
+        </object>
+       </void>
+       <void method="add">
+        <object class="Server.BusinessEntity" id="BusinessEntity6">
+         <void class="Server.BusinessEntity" method="getField">
+          <string>subentityFactory</string>
+          <void method="set">
+           <object idref="BusinessEntity6"/>
+           <object idref="EntityFactory0"/>
+          </void>
+         </void>
+         <void property="component_number">
+          <int>1</int>
+         </void>
+         <void property="entityTitle">
+          <string>Centre Mission Statement</string>
+         </void>
+         <void property="parentEntity">
+          <object idref="BusinessEntity0"/>
+         </void>
+         <void property="sentence">
+          <string>Enter in an Institutional Mission Statement!</string>
+         </void>
+         <void property="statements">
+          <object idref="ArrayList0"/>
+         </void>
+         <void property="subentities">
+          <object class="java.util.ArrayList">
+           <void method="add">
+            <object class="Server.BusinessEntity" id="BusinessEntity7">
+             <void class="Server.BusinessEntity" method="getField">
+              <string>subentityFactory</string>
+              <void method="set">
+               <object idref="BusinessEntity7"/>
+               <object idref="EntityFactory1"/>
+              </void>
+             </void>
+             <void property="entityTitle">
+              <string>Department</string>
+             </void>
+             <void property="parentEntity">
+              <object idref="BusinessEntity6"/>
+             </void>
+             <void property="sentence">
+              <string>Enter in a Name for your Department!</string>
+             </void>
+             <void property="statements">
+              <object idref="ArrayList1"/>
+             </void>
+             <void property="subentities">
+              <object class="java.util.ArrayList">
+               <void method="add">
+                <object class="Server.BusinessEntity" id="BusinessEntity8">
+                 <void class="Server.BusinessEntity" method="getField">
+                  <string>subentityFactory</string>
+                  <void method="set">
+                   <object idref="BusinessEntity8"/>
+                   <object idref="EntityFactory2"/>
+                  </void>
+                 </void>
+                 <void property="entityTitle">
+                  <string>Goal</string>
+                 </void>
+                 <void property="parentEntity">
+                  <object idref="BusinessEntity7"/>
+                 </void>
+                 <void property="sentence">
+                  <string>Enter what your Goal is!</string>
+                 </void>
+                 <void property="statements">
+                  <object idref="ArrayList2"/>
+                 </void>
+                 <void property="subentities">
+                  <object class="java.util.ArrayList">
+                   <void method="add">
+                    <object class="Server.BusinessEntity" id="BusinessEntity9">
+                     <void class="Server.BusinessEntity" method="getField">
+                      <string>subentityFactory</string>
+                      <void method="set">
+                       <object idref="BusinessEntity9"/>
+                       <object idref="EntityFactory3"/>
+                      </void>
+                     </void>
+                     <void property="entityTitle">
+                      <string>SLO</string>
+                     </void>
+                     <void property="parentEntity">
+                      <object idref="BusinessEntity8"/>
+                     </void>
+                     <void property="sentence">
+                      <string>Enter what your Student Learning Objective is!</string>
                      </void>
                      <void property="statements">
                       <object idref="ArrayList3"/>
@@ -308,7 +553,10 @@
                           <string>Tool</string>
                          </void>
                          <void property="parentEntity">
-                          <object idref="BusinessEntity5"/>
+                          <object idref="BusinessEntity9"/>
+                         </void>
+                         <void property="sentence">
+                          <string>Enter a description for your tool!</string>
                          </void>
                          <void property="statements">
                           <object idref="ArrayList4"/>
@@ -358,7 +606,7 @@
    <string>year</string>
    <void method="set">
     <object idref="BP_Node0"/>
-    <int>2011</int>
+    <int>2016</int>
    </void>
   </void>
   <void class="Server.BP_Node" method="getField">
@@ -366,6 +614,13 @@
    <void method="set">
     <object idref="BP_Node0"/>
     <string>Math</string>
+   </void>
+  </void>
+  <void class="Server.BP_Node" method="getField">
+   <string>editable</string>
+   <void method="set">
+    <object idref="BP_Node0"/>
+    <boolean>true</boolean>
    </void>
   </void>
  </object>

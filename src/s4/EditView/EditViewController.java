@@ -6,6 +6,7 @@ import Client.Client;
 import Server.BP_Node;
 import Server.BusinessEntity;
 import Server.CentrePlanFactory;
+import Server.EntityStatement;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -64,7 +65,7 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
-		
+
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(client.business.entity);
 		// make the tree always fully expanded for convienence
@@ -83,7 +84,7 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
-		
+
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(plan);
 		// make the tree always fully expanded for convienence
@@ -99,6 +100,8 @@ public class EditViewController
 
 	private void backAction()
 	{
+		client.writeLocalBP(client.business);
+		client.proxy.writeDisk();
 		main.showHome(client);
 	}
 
@@ -110,17 +113,19 @@ public class EditViewController
 		saveStatementButton.setVisible(true);
 		addCompButton.setVisible(true);
 		delCompButton.setVisible(true);
+		
 		// set up
 		if (newValue != null)
 		{
-			textArea.setText(newValue.getValue().getStatement(0).getStatement());
+			System.out.println(newValue.getValue().getStatement(0).getStatement());
+			System.out.println(newValue.getValue().getTreeItemID());
+			textArea.setText(newValue.getValue().getSentence());
 			entityTitleField.setText(newValue.getValue().getEntityTitle());
 			changeTitleButton.setOnAction(e -> changeETitle(newValue, entityTitleField.getText()));
 			saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
 			addCompButton.setOnAction(e -> addComp(newValue));
 			delCompButton.setOnAction(e -> delComp(newValue));
-		}
-		else
+		} else
 		{
 			hide();
 		}
@@ -136,23 +141,23 @@ public class EditViewController
 			subs.remove(newValue.getValue());
 			parent.setSubentities(subs);
 		}
-		client.proxy.writeDisk();
-		client.proxy.readDisk();
+		client.writeLocalBP(client.business);;
 		hide();
 	}
 
 	private void addComp(TreeItem<BusinessEntity> newValue)
 	{
-
+		if (newValue.getValue().getSubentityFactory() != null)
+		{
 		BusinessEntity new_plan = newValue.getValue().createNewSubentity();
 		// set the factory to be the same depth as the factory in centreplanfactory
 		new_plan.setEntityFactory(centreHead1.getFactoryFromIndex(new_plan.getTree_level() + 1));
 		/// new tree view
 		BusinessEntity plan = client.business.entity;
 		client.business.entity = getHead(plan);
-		client.proxy.writeDisk();
-		client.proxy.readDisk();
+		client.writeLocalBP(client.business);;
 		hide();
+		}
 	}
 
 	/// this returns the top of the business plan given a node anywher in the tree
@@ -167,10 +172,15 @@ public class EditViewController
 
 	private void saveStatement(TreeItem<BusinessEntity> newValue, String text)
 	{
+		System.out.println("Called");
+		System.out.println(newValue.getValue().getSentence());
 		BusinessEntity current = newValue.getValue();
-		current.getStatement(0).setStatement(text);
-		client.proxy.writeDisk();
-		client.proxy.readDisk();
+		if (newValue.getValue().getTreeItemID() == (current.getTreeItemID()))
+		{
+
+			current.setSentence(text);
+			client.writeLocalBP(client.business);;
+		}
 		hide();
 	}
 
@@ -178,8 +188,7 @@ public class EditViewController
 	{
 		BusinessEntity current = newValue.getValue();
 		current.setEntityTitle(text);
-		client.proxy.writeDisk();
-		client.proxy.readDisk();
+		client.writeLocalBP(client.business);;
 		hide();
 	}
 
@@ -195,6 +204,7 @@ public class EditViewController
 				// each treeitem id is a unique identifier of each BusinessEntity
 				if (plan.getTreeItemID() == newValue.getValue().getTreeItemID())
 				{
+					System.out.println(plan.getTreeItemID());
 					return plan;
 				}
 				ArrayList<BusinessEntity> children = plan.getSubentities();
@@ -229,4 +239,6 @@ public class EditViewController
 		return treeItem;
 	}
 
+	
+	
 }
