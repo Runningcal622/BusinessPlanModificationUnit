@@ -3,6 +3,7 @@ package s4.MainView;
 
 import Client.Client;
 import Server.Server;
+import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
@@ -21,7 +22,13 @@ public class MainViewController
 
 	@FXML
 	private RadioButton selectHost;
+     @FXML
+    private Button cancel;
 
+    @FXML
+    private Button loginButton;
+
+    
 	@FXML
 	private TextField username;
 
@@ -72,4 +79,9 @@ public class MainViewController
 		selectHost.setOnAction(e -> radioClicked(selectHost));
 	
 	}
+	 public void cancelLogin() 
+    {
+    	username.setPromptText("Enter username...");
+		pass.setPromptText("Enter password...");
+    }
 }
