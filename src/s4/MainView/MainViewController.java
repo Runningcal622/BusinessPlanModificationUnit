@@ -9,7 +9,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import s4.Main;
 
-public class LoginViewController
+public class MainViewController
 {
 	Client client;
 	Main main;
