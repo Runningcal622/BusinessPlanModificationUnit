@@ -32,7 +32,7 @@ public class Main extends Application
 		this.stage=stage;		
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("MainView/MainView2.fxml"));
+		loader.setLocation(Main.class.getResource("MainView/MainView.fxml"));
 		viewGoesHere = loader.load();
 		
 		MainViewController cont = loader.getController();
