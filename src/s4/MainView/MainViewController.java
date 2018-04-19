@@ -17,10 +17,10 @@ public class MainViewController
 	private PasswordField pass;
 
 	@FXML
-	private RadioButton localHost;
+	private RadioButton local;
 
 	@FXML
-	private RadioButton otherHost;
+	private RadioButton selectHost;
 
 	@FXML
 	private TextField username;
@@ -46,21 +46,21 @@ public class MainViewController
 	
 	void radioClicked(RadioButton buttonPushed)
 	{
-		if (buttonPushed.textProperty().getValue().equals("Localhost"))
+		if (buttonPushed.textProperty().getValue().equals("local"))
 		{
-			if (otherHost.isSelected())
+			if (selectHost.isSelected())
 			{
-				otherHost.setSelected(false);
+				selectHost.setSelected(false);
 			}
-			localHost.setSelected(true);
+			local.setSelected(true);
 		}
 		else
 		{
-			if (localHost.isSelected())
+			if (local.isSelected())
 			{
-				localHost.setSelected(false);
+				local.setSelected(false);
 			}
-			otherHost.setSelected(true);
+			selectHost.setSelected(true);
 		}
 	}
 	
@@ -68,8 +68,8 @@ public class MainViewController
 	{
 		client = new Client(server);
 		client.proxy.readDisk();
-		localHost.setOnAction(e -> radioClicked(localHost));
-		otherHost.setOnAction(e -> radioClicked(otherHost));
+		local.setOnAction(e -> radioClicked(local));
+		selectHost.setOnAction(e -> radioClicked(selectHost));
 	
 	}
 }
