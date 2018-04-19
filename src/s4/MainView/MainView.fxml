@@ -42,7 +42,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="12.0" GridPane.rowIndex="4">
                      <children>
-                        <Button id="cancel" fx:id="cancel" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-color: grey; -fx-border-color: white; -fx-border-width: 3;" text="Cancel" textFill="WHITE">
+                        <Button id="cancel" fx:id="cancel" mnemonicParsing="false" style="-fx-background-color: grey; -fx-border-color: white; -fx-border-width: 3;" text="Cancel" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                            </padding>
@@ -50,7 +50,7 @@
                               <Font name="Verdana Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-color: grey; -fx-border-color: white; -fx-border-width: 3;" text="Login" textFill="WHITE">
+                        <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" style="-fx-background-color: grey; -fx-border-color: white; -fx-border-width: 3;" text="Login" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="19.0" right="19.0" top="10.0" />
                            </padding>
