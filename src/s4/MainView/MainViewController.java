@@ -9,24 +9,24 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import s4.Main;
 
-public class MainViewController
+public class LoginController
 {
 	Client client;
 	Main main;
 	@FXML
-	private PasswordField passField;
+	private PasswordField pass;
 
 	@FXML
-	private RadioButton radioLocalHost;
+	private RadioButton localHost;
 
 	@FXML
-	private RadioButton radioForeignHost;
+	private RadioButton otherHost;
 
 	@FXML
-	private TextField userField;
+	private TextField username;
 
 	@FXML
-	private TextField foreginHostname;
+	private TextField portNum;
 
 	public void setMain(Main m)
 	{
@@ -35,10 +35,7 @@ public class MainViewController
 	@FXML
 	void login()
 	{
-		String password = passField.getText();
-		String username = userField.getText();
-		System.out.println("here 1");
-		client.login(username, password);
+		client.login(username.getText(), pass.getText());
 		if (client.person != null)
 		{
 			main.showHome(client);
@@ -51,19 +48,19 @@ public class MainViewController
 	{
 		if (buttonPushed.textProperty().getValue().equals("Localhost"))
 		{
-			if (radioForeignHost.isSelected())
+			if (otherHost.isSelected())
 			{
-				radioForeignHost.setSelected(false);
+				otherHost.setSelected(false);
 			}
-			radioLocalHost.setSelected(true);
+			localHost.setSelected(true);
 		}
 		else
 		{
-			if (radioLocalHost.isSelected())
+			if (localHost.isSelected())
 			{
-				radioLocalHost.setSelected(false);
+				localHost.setSelected(false);
 			}
-			radioForeignHost.setSelected(true);
+			otherHost.setSelected(true);
 		}
 	}
 	
@@ -71,8 +68,8 @@ public class MainViewController
 	{
 		client = new Client(server);
 		client.proxy.readDisk();
-		radioLocalHost.setOnAction(e -> radioClicked(radioLocalHost));
-		radioForeignHost.setOnAction(e -> radioClicked(radioForeignHost));
+		localHost.setOnAction(e -> radioClicked(localHost));
+		otherHost.setOnAction(e -> radioClicked(otherHost));
 	
 	}
 }
