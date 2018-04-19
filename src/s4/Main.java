@@ -120,7 +120,7 @@ public class Main extends Application
 			viewGoesHere.setCenter(loader.load());
 			NewUserViewController cont = loader.getController();
 			cont.setMain(this, client);
-			cont.setUp();
+			cont.initialize(null, null);;
 				
 		} catch (IOException e)
 		{
@@ -138,8 +138,7 @@ public class Main extends Application
 			viewGoesHere.setCenter(loader.load());
 			CloneViewController cont = loader.getController();
 			cont.setMain(this, client, node, dep_plans);
-			cont.setUp();
-				
+			cont.initialize(null, null);	
 		} catch (IOException e)
 		{
 			e.printStackTrace();
