@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CentrePlanApplication.homeView.HomeViewController">
+  <items>
+    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="160.0">
+         <children>
+            <BorderPane layoutX="-2.0" layoutY="-2.0" prefHeight="150.0" prefWidth="900.0">
+               <top>
+                  <HBox maxWidth="-Infinity" prefHeight="40.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="19.0" prefWidth="58.0" text="Home">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="27.0" prefWidth="18.0" text="&gt;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="departmentLabel">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" text="Logout">
+                           <HBox.margin>
+                              <Insets left="775.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <VBox prefHeight="173.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="600.0">
+                           <children>
+                              <ComboBox fx:id="selectYear" prefWidth="150.0" promptText="Select year..." />
+                              <ButtonBar maxHeight="-Infinity" prefHeight="50.0" prefWidth="267.0">
+                                <buttons>
+                                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#OnEditButton" text="Edit/View" />
+                                    <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#OnDeleteButton" text="Delete" />
+                                    <Button fx:id="cloneButton" mnemonicParsing="false" onAction="#OnCloneButton" text="Clone" />
+                                </buttons>
+                              </ButtonBar>
+                           </children>
+                        </HBox>
+                        <Button fx:id="makeNewPlanButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#OnMakeNewPlanButton" text="Make New Plan">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Button>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="598.0">
+         <children>
+            <TableView fx:id="planTable" prefHeight="542.0" prefWidth="898.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>
