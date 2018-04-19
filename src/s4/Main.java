@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import s4.CloneView.CloneViewController;
 import s4.EditView.EditViewController;
@@ -31,7 +32,7 @@ public class Main extends Application
 		this.stage=stage;		
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("mainView/mainView.fxml"));
+		loader.setLocation(Main.class.getResource("MainView/MainView2.fxml"));
 		viewGoesHere = loader.load();
 		
 		MainViewController cont = loader.getController();
