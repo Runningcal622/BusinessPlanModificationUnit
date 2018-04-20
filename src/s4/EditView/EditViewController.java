@@ -107,6 +107,8 @@ public class EditViewController
 
 	private void clickedOn(TreeItem<BusinessEntity> newValue, BusinessEntity plan, TreeView<BusinessEntity> comp)
 	{
+		if (client.business.editable)
+		{
 		textArea.setVisible(true);
 		entityTitleField.setVisible(true);
 		changeTitleButton.setVisible(true);
@@ -128,6 +130,15 @@ public class EditViewController
 		} else
 		{
 			hide();
+		}
+		}
+		else
+		{
+			textArea.setVisible(true);
+			entityTitleField.setVisible(true);
+			textArea.setText(newValue.getValue().getSentence());
+			entityTitleField.setText(newValue.getValue().getEntityTitle());
+
 		}
 	}
 
