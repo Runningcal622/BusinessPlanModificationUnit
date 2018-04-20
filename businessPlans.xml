@@ -990,7 +990,7 @@
         <string>subentityFactory</string>
         <void method="set">
          <object idref="BusinessEntity15"/>
-         <object class="Server.EntityFactory">
+         <object class="Server.EntityFactory" id="EntityFactory4">
           <void property="defaultStatements">
            <object class="java.util.ArrayList" id="ArrayList10">
             <void method="add">
@@ -1025,7 +1025,7 @@
        <void property="statements">
         <object class="java.util.ArrayList">
          <void method="add">
-          <object class="Server.EntityStatement">
+          <object class="Server.EntityStatement" id="EntityStatement0">
            <void property="date">
             <object class="java.util.Date">
              <long>1524176203793</long>
@@ -2087,6 +2087,66 @@
      <string>editable</string>
      <void method="set">
       <object idref="BP_Node5"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.BP_Node" id="BP_Node6">
+    <void class="Server.BP_Node" method="getField">
+     <string>entity</string>
+     <void method="set">
+      <object idref="BP_Node6"/>
+      <object class="Server.BusinessEntity" id="BusinessEntity30">
+       <void class="Server.BusinessEntity" method="getField">
+        <string>subentityFactory</string>
+        <void method="set">
+         <object idref="BusinessEntity30"/>
+         <object idref="EntityFactory4"/>
+        </void>
+       </void>
+       <void property="entityTitle">
+        <string>Centre Plan Title</string>
+       </void>
+       <void property="sentence">
+        <string>Enter description of the plan.</string>
+       </void>
+       <void property="statements">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <object idref="EntityStatement0"/>
+         </void>
+        </object>
+       </void>
+       <void property="subentities">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <object idref="BusinessEntity16"/>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+    </void>
+    <void class="Server.BP_Node" method="getField">
+     <string>year</string>
+     <void method="set">
+      <object idref="BP_Node6"/>
+      <int>2017</int>
+     </void>
+    </void>
+    <void class="Server.BP_Node" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="BP_Node6"/>
+      <string>Computer Science</string>
+     </void>
+    </void>
+    <void class="Server.BP_Node" method="getField">
+     <string>editable</string>
+     <void method="set">
+      <object idref="BP_Node6"/>
       <boolean>true</boolean>
      </void>
     </void>

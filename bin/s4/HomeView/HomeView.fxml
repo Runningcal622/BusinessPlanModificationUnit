@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeViewController">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s4.HomeView.HomeViewController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -20,10 +20,21 @@
                <top>
                   <HBox prefHeight="44.0" prefWidth="598.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label text="Home" />
+                        <Label prefHeight="18.0" prefWidth="45.0" text="Home" />
                         <Label text="&gt;" />
-                        <Label fx:id="departmentLabel" />
-                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#OnLogout" text="Logout" />
+                        <Label fx:id="departmentLabel" prefHeight="18.0" prefWidth="128.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#OnLogout" text="Logout">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="300.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                </top>
@@ -32,8 +43,8 @@
                      <children>
                         <HBox prefHeight="18.0" prefWidth="598.0">
                            <children>
-                              <ComboBox fx:id="selectYear" prefWidth="150.0" />
-                              <ButtonBar prefHeight="47.0" prefWidth="267.0">
+                              <ComboBox fx:id="selectYear" prefWidth="150.0" promptText="Select year..." />
+                              <ButtonBar buttonMinWidth="100.0" prefHeight="47.0" prefWidth="267.0">
                                 <buttons>
                                   <Button fx:id="editButton" mnemonicParsing="false" onAction="#OnEdit" text="Edit/View" />
                                     <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
@@ -56,7 +67,7 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <TableView fx:id="planTable" onMouseClicked="#OnTableRowClick" prefHeight="200.0" prefWidth="598.0" />
+            <TableView fx:id="planTable" prefHeight="200.0" prefWidth="598.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>

@@ -50,7 +50,7 @@ public class MainViewController
 		
 	}
 
-	
+	@FXML
 	void radioClicked(RadioButton buttonPushed)
 	{
 		if (buttonPushed.textProperty().getValue().equals("local"))

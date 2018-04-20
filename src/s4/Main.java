@@ -10,7 +10,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import s4.CloneView.CloneViewController;
 import s4.EditView.EditViewController;
@@ -49,7 +48,6 @@ public class Main extends Application
 
 	public void showHome(Client client)
 	{
-		System.out.println("here");
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("HomeView/HomeView.fxml"));
 		try
@@ -130,7 +128,7 @@ public class Main extends Application
 	}
 
 
-	public void showClone(BP_Node node, Client client, ArrayList<BP_Node> dep_plans)
+	public void showClone(BP_Node node, Client client, ArrayList<BP_Node> dep_plans,boolean new_plan)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("CloneView/CloneView.fxml"));
@@ -138,7 +136,7 @@ public class Main extends Application
 		{
 			viewGoesHere.setCenter(loader.load());
 			CloneViewController cont = loader.getController();
-			cont.setMain(this, client, node, dep_plans);
+			cont.setMain(this, client, node, dep_plans,new_plan);
 			cont.initialize(null, null);	
 		} catch (IOException e)
 		{
