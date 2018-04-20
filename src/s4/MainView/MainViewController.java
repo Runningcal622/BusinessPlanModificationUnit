@@ -4,6 +4,7 @@ package s4.MainView;
 import Client.Client;
 import Server.Server;
 import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
@@ -14,6 +15,8 @@ public class MainViewController
 {
 	Client client;
 	Main main;
+	String port;
+	
 	@FXML
 	private PasswordField pass;
 
@@ -35,6 +38,8 @@ public class MainViewController
 	@FXML
 	private TextField portNum;
 
+
+	
 	public void setMain(Main m)
 	{
 		this.main=m;
@@ -51,37 +56,31 @@ public class MainViewController
 	}
 
 	@FXML
-	void radioClicked(RadioButton buttonPushed)
+	void localAction(ActionEvent event)
 	{
-		if (buttonPushed.textProperty().getValue().equals("local"))
-		{
-			if (selectHost.isSelected())
-			{
-				selectHost.setSelected(false);
-			}
-			local.setSelected(true);
-		}
-		else
-		{
-			if (local.isSelected())
-			{
-				local.setSelected(false);
-			}
-			selectHost.setSelected(true);
-		}
+		selectHost.setSelected(false);
+		portNum.setVisible(false);
+		
+	}
+	
+	@FXML 
+	void selectHostAction(ActionEvent event) {
+		local.setSelected(false);
+		portNum.setVisible(true);
 	}
 	
 	public void setServer(Server server)
 	{
 		client = new Client(server);
 		client.proxy.readDisk();
-		local.setOnAction(e -> radioClicked(local));
-		selectHost.setOnAction(e -> radioClicked(selectHost));
-	
+		//local.setOnAction(e -> radioClicked(local));
+		local.setSelected(true);
+		portNum.setVisible(false);
 	}
 	 public void cancelLogin() 
     {
     	username.setPromptText("Enter username...");
 		pass.setPromptText("Enter password...");
+		main.stage.close();
     }
 }

@@ -103,7 +103,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <RadioButton id="local" fx:id="local" cacheShape="false" mnemonicParsing="false" text="LocalHost" textFill="WHITE">
+                              <RadioButton id="local" fx:id="local" cacheShape="false" mnemonicParsing="false" onAction="#localAction" text="LocalHost" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                  </padding>
@@ -111,7 +111,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </RadioButton>
-                              <RadioButton id="selectHost" fx:id="selectHost" mnemonicParsing="false" text="OtherHost" textFill="WHITE">
+                              <RadioButton id="selectHost" fx:id="selectHost" mnemonicParsing="false" onAction="#selectHostAction" text="OtherHost" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                  </padding>
@@ -121,7 +121,7 @@
                               </RadioButton>
                            </children>
                         </HBox>
-                        <TextField fx:id="portNum" opacity="0.89" text="Type port number..." />
+                        <TextField fx:id="portNum" opacity="0.89" promptText="Port number" />
                      </children>
                   </VBox>
                </children>
