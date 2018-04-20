@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_151" class="java.beans.XMLDecoder">
+ <object class="java.util.LinkedList">
+  <void method="add">
+   <object class="Server.Person" id="Person0">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person0"/>
+      <string>Caleb</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person0"/>
+      <string>4C</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person0"/>
+      <string>Math</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>admin</string>
+     <void method="set">
+      <object idref="Person0"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person1">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person1"/>
+      <string>Alex</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person1"/>
+      <string>Beta</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person1"/>
+      <string>Computer Science</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>admin</string>
+     <void method="set">
+      <object idref="Person1"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
