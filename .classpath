@@ -4,6 +4,12 @@
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
+<<<<<<< HEAD
+=======
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/**"/>
+		</accessrules>
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="src" path="src"/>

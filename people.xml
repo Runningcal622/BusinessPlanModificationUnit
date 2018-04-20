@@ -2,29 +2,46 @@
 <java version="1.8.0_151" class="java.beans.XMLDecoder">
  <object class="java.util.LinkedList">
   <void method="add">
+<<<<<<< HEAD
    <object class="CentrePlanApplication.Server.Person" id="Person0">
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+   <object class="Server.Person" id="Person0">
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>username</string>
      <void method="set">
       <object idref="Person0"/>
       <string>Caleb</string>
      </void>
     </void>
+<<<<<<< HEAD
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>password</string>
      <void method="set">
       <object idref="Person0"/>
       <string>4C</string>
      </void>
     </void>
+<<<<<<< HEAD
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>department</string>
      <void method="set">
       <object idref="Person0"/>
       <string>Math</string>
      </void>
     </void>
+<<<<<<< HEAD
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>admin</string>
      <void method="set">
       <object idref="Person0"/>
@@ -34,29 +51,46 @@
    </object>
   </void>
   <void method="add">
+<<<<<<< HEAD
    <object class="CentrePlanApplication.Server.Person" id="Person1">
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+   <object class="Server.Person" id="Person1">
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>username</string>
      <void method="set">
       <object idref="Person1"/>
       <string>Alex</string>
      </void>
     </void>
+<<<<<<< HEAD
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>password</string>
      <void method="set">
       <object idref="Person1"/>
       <string>Beta</string>
      </void>
     </void>
+<<<<<<< HEAD
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>department</string>
      <void method="set">
       <object idref="Person1"/>
       <string>Computer Science</string>
      </void>
     </void>
+<<<<<<< HEAD
     <void class="CentrePlanApplication.Server.Person" method="getField">
+=======
+    <void class="Server.Person" method="getField">
+>>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>admin</string>
      <void method="set">
       <object idref="Person1"/>
