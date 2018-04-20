@@ -52,6 +52,12 @@ public class HomeViewController
 	private Button newPlanButton;
 
 	@FXML
+	private Button newUserButton;
+
+	@FXML
+	private Button setStatusButton;
+
+	@FXML
 	private TableView<BP_Node> planTable;
 
 	public void setMain(Main main)
@@ -63,7 +69,7 @@ public class HomeViewController
 	{
 		this.client = client;
 		departmentLabel.setText(client.person.getDepartment());
-		
+
 		dep_plans = new ArrayList<BP_Node>();
 		getLists(selectYear, dep_plans);
 
@@ -110,28 +116,32 @@ public class HomeViewController
 		});
 
 		planTable.getColumns().addAll(title_column, year_column, status_column);
-		
-		//Deselect the row if the row has already been clicked
-		planTable.setRowFactory(new Callback<TableView<BP_Node>, TableRow<BP_Node>>() {  
-	        @Override  
-	        public TableRow<BP_Node> call(TableView<BP_Node> plan_table_row) {  
-	            final TableRow<BP_Node> row = new TableRow<>();  
-				row.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {  
-	                @Override  
-	                public void handle(MouseEvent event) {  
-	                    final int index = row.getIndex();  
-	                    if (index >= 0 && index < planTable.getItems().size() && planTable.getSelectionModel().isSelected(index)  ) {
-	                        planTable.getSelectionModel().clearSelection();
-	                        event.consume();  
-	                    }  
-	                }  
-	            });  
-	            return row;  
-	        }  
-	    });  
+
+		// Deselect the row if the row has already been clicked
+		planTable.setRowFactory(new Callback<TableView<BP_Node>, TableRow<BP_Node>>()
+		{
+			@Override
+			public TableRow<BP_Node> call(TableView<BP_Node> plan_table_row)
+			{
+				final TableRow<BP_Node> row = new TableRow<>();
+				row.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>()
+				{
+					@Override
+					public void handle(MouseEvent event)
+					{
+						final int index = row.getIndex();
+						if (index >= 0 && index < planTable.getItems().size()
+								&& planTable.getSelectionModel().isSelected(index))
+						{
+							planTable.getSelectionModel().clearSelection();
+							event.consume();
+						}
+					}
+				});
+				return row;
+			}
+		});
 	}
-		
-	
 
 	private void getLists(ComboBox<Integer> plans, ArrayList<BP_Node> dep_plans)
 	{
@@ -161,7 +171,7 @@ public class HomeViewController
 		if (clone_year != -1)
 		{
 			client.requestBusinessPlan(client.person.getDepartment(), clone_year);
-			main.showClone(client.business, client, dep_plans,false);
+			main.showClone(client.business, client, dep_plans, false);
 		}
 	}
 
@@ -248,6 +258,84 @@ public class HomeViewController
 	@FXML
 	void OnMakeNewPlan(ActionEvent event)
 	{
-		main.showClone(client.business, client, dep_plans,true);
+		main.showClone(client.business, client, dep_plans, true);
+	}
+
+	@FXML 
+	void OnSetStatus(ActionEvent event)
+	{
+		if (client.person.is_admin)
+		{
+			// set up the set status and add new user pages
+
+			int year = -1;
+			if (plans.getValue() == null)
+			{
+				year = onEdit();
+			} else
+			{
+				year = plans.getValue();
+			}
+
+			if (year != -1)
+			{
+				set_BPStatus(year, client.person.getDepartment(), dep_plans);
+			}
+		}
+	}
+	
+	private void set_BPStatus(int ye, String department, ArrayList<BP_Node> dep_plans)
+	{
+		// make dialog box for getting the new year and status of the plan
+		Stage dialog = new Stage();
+		dialog.initModality(Modality.APPLICATION_MODAL);
+		dialog.initOwner(mainStage);
+
+		VBox dialogVbox = new VBox();
+		// combo box for editable status
+		ComboBox<String> editable = new ComboBox<String>();
+		editable.setPromptText("edit status...");
+		editable.getItems().addAll("editable", "not editable");
+
+		HBox buttons = new HBox();
+
+		Button ok = new Button("Ok");
+		ok.setOnAction(e ->
+		{
+			data = new ArrayList<String>();
+			data.add(editable.getValue());
+			dialog.close();
+		});
+
+		Button cancel = new Button("Cancel");
+		cancel.setOnAction(e -> dialog.close());
+
+		buttons.getChildren().addAll(ok, cancel);
+
+		// add everything to the vbox
+		dialogVbox.getChildren().addAll(editable, buttons);
+
+		// set the scene
+		Scene dialogScene = new Scene(dialogVbox, 300, 200);
+		dialog.setScene(dialogScene);
+
+		dialog.showAndWait();
+
+		String edit = data.get(0);
+		for (BP_Node plan : dep_plans)
+		{
+			if (plan.year == ye)
+			{
+				boolean set_editable = false;
+				if (edit == "editable")
+				{
+					set_editable = true;
+				}
+				client.setBPStatus(plan, set_editable);
+			}
+		}
+		makeHome(client.person);
+		mainStage.setScene(home);
+		mainStage.show();
 	}
 }
