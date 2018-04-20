@@ -49,6 +49,7 @@
                                   <Button fx:id="editButton" mnemonicParsing="false" onAction="#OnEdit" text="Edit/View" />
                                     <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
                                     <Button fx:id="cloneButton" mnemonicParsing="false" onAction="#OnClone" text="Clone" />
+                                    <Button fx:id="setStatusButton" mnemonicParsing="false" onAction="#OnSetStatus" text="Set Status" />
                                 </buttons>
                               </ButtonBar>
                            </children>
@@ -56,7 +57,16 @@
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button fx:id="newPlanButton" mnemonicParsing="false" onAction="#OnMakeNewPlan" text="Make New Plan" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="newPlanButton" mnemonicParsing="false" onAction="#OnMakeNewPlan" text="Make New Plan">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="newUserButton" mnemonicParsing="false" onAction="#OnAddNewUser" text="Add New User" />
+                           </children>
+                        </HBox>
                      </children>
                      <BorderPane.margin>
                         <Insets />

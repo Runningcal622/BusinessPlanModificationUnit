@@ -16,6 +16,7 @@ import s4.EditView.EditViewController;
 import s4.HomeView.HomeViewController;
 import s4.MainView.MainViewController;
 import s4.NewUserView.NewUserViewController;
+import s4.SetEditStatusView.SetEditStatusViewController;
 
 public class Main extends Application
 {
@@ -44,6 +45,11 @@ public class Main extends Application
 		stage.setScene(s);
 		stage.show();
 		
+	}
+	
+	public Stage getStage()
+	{
+		return stage;
 	}
 
 	public void showHome(Client client)
@@ -138,6 +144,21 @@ public class Main extends Application
 			CloneViewController cont = loader.getController();
 			cont.setMain(this, client, node, dep_plans,new_plan);
 			cont.initialize(null, null);	
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void showSetStatus(Client client,int year)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("SetEditStatusView/SetEditStatusView.fxml"));
+		try
+		{
+			viewGoesHere.setCenter(loader.load());
+			SetEditStatusViewController cont = loader.getController();
+			cont.setMain(this,client,year);
 		} catch (IOException e)
 		{
 			e.printStackTrace();

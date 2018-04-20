@@ -57,9 +57,9 @@ public class NewUserViewController implements Initializable {
 		String department = depField.getText();
 		Boolean admin = false;
 		if (AdminBox.getValue().equals("Non-Admin")) {
-			admin = true;
-		} else if  (AdminBox.getValue().equals("Admin")){
 			admin = false;
+		} else if  (AdminBox.getValue().equals("Admin")){
+			admin = true;
 		}
 		if (username.length() != 0 && password.length() != 0 && department.length() != 0 && admin != null) {
 			client.addPeople(username, password, department, admin);

@@ -2,46 +2,29 @@
 <java version="1.8.0_151" class="java.beans.XMLDecoder">
  <object class="java.util.LinkedList">
   <void method="add">
-<<<<<<< HEAD
-   <object class="CentrePlanApplication.Server.Person" id="Person0">
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
    <object class="Server.Person" id="Person0">
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>username</string>
      <void method="set">
       <object idref="Person0"/>
       <string>Caleb</string>
      </void>
     </void>
-<<<<<<< HEAD
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>password</string>
      <void method="set">
       <object idref="Person0"/>
       <string>4C</string>
      </void>
     </void>
-<<<<<<< HEAD
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>department</string>
      <void method="set">
       <object idref="Person0"/>
       <string>Math</string>
      </void>
     </void>
-<<<<<<< HEAD
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>admin</string>
      <void method="set">
       <object idref="Person0"/>
@@ -51,50 +34,154 @@
    </object>
   </void>
   <void method="add">
-<<<<<<< HEAD
-   <object class="CentrePlanApplication.Server.Person" id="Person1">
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
    <object class="Server.Person" id="Person1">
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>username</string>
      <void method="set">
       <object idref="Person1"/>
       <string>Alex</string>
      </void>
     </void>
-<<<<<<< HEAD
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>password</string>
      <void method="set">
       <object idref="Person1"/>
       <string>Beta</string>
      </void>
     </void>
-<<<<<<< HEAD
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>department</string>
      <void method="set">
       <object idref="Person1"/>
       <string>Computer Science</string>
      </void>
     </void>
-<<<<<<< HEAD
-    <void class="CentrePlanApplication.Server.Person" method="getField">
-=======
     <void class="Server.Person" method="getField">
->>>>>>> 86217f9d0b7a0e0901d9555a85bf75f511b9fc52
      <string>admin</string>
      <void method="set">
       <object idref="Person1"/>
       <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person2">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <string>joe</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <string>test</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <string>Computer</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>admin</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person3">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <string>joe</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <string>test</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <string>Computer Science</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>admin</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person4">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <string>sav</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <string>yo</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <string>Computer Science</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>admin</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person5">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person5"/>
+      <string>Griff</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person5"/>
+      <string>riff</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person5"/>
+      <string>Computer Science</string>
      </void>
     </void>
    </object>

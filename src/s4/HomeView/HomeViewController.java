@@ -21,6 +21,9 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import s4.Main;
 
@@ -141,6 +144,12 @@ public class HomeViewController
 				return row;
 			}
 		});
+		
+		if(!client.person.isAdmin())
+		{
+			newUserButton.setVisible(false);
+			setStatusButton.setVisible(false);
+		}
 	}
 
 	private void getLists(ComboBox<Integer> plans, ArrayList<BP_Node> dep_plans)
@@ -261,81 +270,29 @@ public class HomeViewController
 		main.showClone(client.business, client, dep_plans, true);
 	}
 
-	@FXML 
+	@FXML
 	void OnSetStatus(ActionEvent event)
 	{
-		if (client.person.is_admin)
+		// set up the set status and add new user pages
+
+		int year = -1;
+		if (selectYear.getValue() == null)
 		{
-			// set up the set status and add new user pages
-
-			int year = -1;
-			if (plans.getValue() == null)
-			{
-				year = onEdit();
-			} else
-			{
-				year = plans.getValue();
-			}
-
-			if (year != -1)
-			{
-				set_BPStatus(year, client.person.getDepartment(), dep_plans);
-			}
+			year = onEdit();
+		} else
+		{
+			year = selectYear.getValue();
+		}
+		
+		if (year != -1)
+		{
+			main.showSetStatus(client,year);
 		}
 	}
-	
-	private void set_BPStatus(int ye, String department, ArrayList<BP_Node> dep_plans)
+
+	@FXML
+	void OnAddNewUser(ActionEvent event)
 	{
-		// make dialog box for getting the new year and status of the plan
-		Stage dialog = new Stage();
-		dialog.initModality(Modality.APPLICATION_MODAL);
-		dialog.initOwner(mainStage);
-
-		VBox dialogVbox = new VBox();
-		// combo box for editable status
-		ComboBox<String> editable = new ComboBox<String>();
-		editable.setPromptText("edit status...");
-		editable.getItems().addAll("editable", "not editable");
-
-		HBox buttons = new HBox();
-
-		Button ok = new Button("Ok");
-		ok.setOnAction(e ->
-		{
-			data = new ArrayList<String>();
-			data.add(editable.getValue());
-			dialog.close();
-		});
-
-		Button cancel = new Button("Cancel");
-		cancel.setOnAction(e -> dialog.close());
-
-		buttons.getChildren().addAll(ok, cancel);
-
-		// add everything to the vbox
-		dialogVbox.getChildren().addAll(editable, buttons);
-
-		// set the scene
-		Scene dialogScene = new Scene(dialogVbox, 300, 200);
-		dialog.setScene(dialogScene);
-
-		dialog.showAndWait();
-
-		String edit = data.get(0);
-		for (BP_Node plan : dep_plans)
-		{
-			if (plan.year == ye)
-			{
-				boolean set_editable = false;
-				if (edit == "editable")
-				{
-					set_editable = true;
-				}
-				client.setBPStatus(plan, set_editable);
-			}
-		}
-		makeHome(client.person);
-		mainStage.setScene(home);
-		mainStage.show();
+		main.showNewUser(client);
 	}
 }
