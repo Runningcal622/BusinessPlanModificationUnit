@@ -94,8 +94,14 @@ public class EditViewController
 		tree.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> clickedOn(newValue, getEntity(newValue, plan), tree));
 		backButton.setOnAction(e -> backAction());
-		logoutButton.setOnAction(e -> main.showLogin());
+		logoutButton.setOnAction(e -> logout());
 
+	}
+
+	private void logout()
+	{
+		client.proxy.writeDisk();
+		main.showLogin();
 	}
 
 	private void backAction()

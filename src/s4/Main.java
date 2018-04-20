@@ -20,9 +20,9 @@ import s4.SetEditStatusView.SetEditStatusViewController;
 
 public class Main extends Application
 {
-	Stage stage;
+	public Stage stage;
 	Server server;
-	BorderPane viewGoesHere;
+	public BorderPane viewGoesHere;
 	
 	
 
@@ -43,6 +43,7 @@ public class Main extends Application
 		showLogin();
 		Scene s = new Scene(viewGoesHere);
 		stage.setScene(s);
+		stage.setTitle("Business plan modification unit");
 		stage.show();
 		
 	}
