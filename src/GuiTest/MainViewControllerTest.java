@@ -1,5 +1,5 @@
 package GuiTest;
-
+//imports
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import s4.Main;
 import s4.MainView.MainViewController;
+import s4.HomeView.HomeViewController;
 import org.testfx.framework.junit5.*;
 @ExtendWith(ApplicationExtension.class)
 public class MainViewControllerTest // extend ApplicationTest
@@ -31,6 +32,7 @@ public class MainViewControllerTest // extend ApplicationTest
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("MainView/MainView.fxml"));
+		//loader.setLocation(Main.class.getResource("HomeView/HomeView.fxml"));
 		try
 		{
 			viewGoesHere.setCenter(loader.load());
@@ -48,13 +50,22 @@ public class MainViewControllerTest // extend ApplicationTest
 		}
 		System.out.println("here");
 	}
+	public void LoginTest(String ButtonId, String text, FxRobot robo) {
+		robo.clickOn(ButtonId);
+				//TextInputControls.clearTextIn("#moneyInput");
+		robo.write(text);
+	}
 
 	@Test
 	public void please(FxRobot robo)
 	{
 		// assertThat();
 		//stage.getScene().getRoot();
-		robo.clickOn("#username");
+		LoginTest("#username", "Caleb", robo);
+		LoginTest("#pass", "4C", robo);
+		//robo.clickOn("#selectHost");
+		//robo.clickOn("#loginButton");
+		
 	}
 
 }
