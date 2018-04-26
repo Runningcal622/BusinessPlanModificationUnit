@@ -30,7 +30,7 @@ public class BusinessEntity implements Serializable
 		this.parentEntity = parentEntity;
 		this.subentityFactory = subentityFactory;
 		tree_level = 0;
-		component_number = 0;
+		component_number = 1;
 		this.sentence = statements.get(0).getStatement();
 	}
 
@@ -66,7 +66,7 @@ public class BusinessEntity implements Serializable
 	public BusinessEntity createNewSubentity()
 	{
 		BusinessEntity newEntity = subentityFactory.nextLayer(this);
-		newEntity.component_number = newEntity.parentEntity.getSubentities().size();
+		newEntity.component_number = newEntity.parentEntity.getSubentities().size()+1;
 		newEntity.tree_level = newEntity.parentEntity.tree_level+1;
 		subentities.add(newEntity);
 		return newEntity;
@@ -262,7 +262,6 @@ public class BusinessEntity implements Serializable
 
 		// Look through statements for the old statement
 		EntityStatement statement;
-
 		for (int i = 0; i < statements.size(); i++)
 		{
 			statement = statements.get(i);
@@ -282,7 +281,7 @@ public class BusinessEntity implements Serializable
 	@Override
 	public String toString()
 	{
-		return entityTitle;
+		return entityTitle+" "+this.component_number;
 	}
 	
 	

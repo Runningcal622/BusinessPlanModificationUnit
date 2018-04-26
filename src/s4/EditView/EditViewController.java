@@ -19,10 +19,10 @@ public class EditViewController
 {
 
 	@FXML
-	private TreeView<BusinessEntity> tree;
+	public TreeView<BusinessEntity> tree;
 
 	@FXML
-	private TextArea textArea;
+	public TextArea textArea;
 
 	@FXML
 	private Button backButton;
@@ -31,7 +31,7 @@ public class EditViewController
 	private Button logoutButton;
 
 	@FXML
-	private TextField entityTitleField;
+	public TextField entityTitleField;
 
 	@FXML
 	private Button changeTitleButton;
