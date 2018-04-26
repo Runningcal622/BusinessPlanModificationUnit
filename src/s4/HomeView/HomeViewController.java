@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -99,9 +100,11 @@ public class HomeViewController
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<BP_Node, String> n)
 			{
+				
 				return new ReadOnlyStringWrapper(String.valueOf(n.getValue().getYear()));
 			}
 		});
+		year_column.setId("year_column");
 
 		// status column
 		TableColumn<BP_Node, String> status_column = new TableColumn<BP_Node, String>("Plan Status");
@@ -120,7 +123,7 @@ public class HomeViewController
 		});
 
 		planTable.getColumns().addAll(title_column, year_column, status_column);
-
+		
 		// Deselect the row if the row has already been clicked
 		planTable.setRowFactory(new Callback<TableView<BP_Node>, TableRow<BP_Node>>()
 		{
@@ -152,6 +155,11 @@ public class HomeViewController
 			setStatusButton.setVisible(false);
 		}
 	}
+	
+	public TableView<BP_Node> getTable()
+	{
+		return planTable;
+	}
 
 	private void getLists(ComboBox<Integer> plans, ArrayList<BP_Node> dep_plans)
 	{
@@ -161,7 +169,6 @@ public class HomeViewController
 			if (node.department.equals(client.person.department))
 			{
 				plans.getItems().add(node.year);
-				System.out.println(plans.getItems().get(1).intValue());
 				dep_plans.add(node);
 			}
 		}
@@ -178,9 +185,11 @@ public class HomeViewController
 		{
 			clone_year = selectYear.getValue();
 		}
+		System.out.println("HERE");
 
 		if (clone_year != -1)
 		{
+			System.out.println("in if statement");
 			client.requestBusinessPlan(client.person.getDepartment(), clone_year);
 			main.showClone(client.business, client, dep_plans, false);
 		}
@@ -218,14 +227,15 @@ public class HomeViewController
 			{
 				if (node.getDepartment().equalsIgnoreCase(client.person.getDepartment()) && node.year == delete_year)
 				{
-					deletePlan(delete_year, dep_plans);
-					selectYear.getItems().remove(index);
-					dep_plans.remove(index);
+					//do nothing
 				} else if (node.getDepartment().equalsIgnoreCase(client.person.getDepartment()))
 				{
 					index++;
 				}
 			}
+			deletePlan(delete_year, dep_plans);
+			selectYear.getItems().remove(index);
+			dep_plans.remove(index);
 		}
 	}
 
