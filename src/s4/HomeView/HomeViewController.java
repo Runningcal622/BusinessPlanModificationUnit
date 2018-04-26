@@ -26,12 +26,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import s4.Main;
+import s4.ViewInterface;
 
 public class HomeViewController
 {
 	private Client client;
 	private ArrayList<BP_Node> dep_plans;
-	private Main main;
+	private ViewInterface main;
 
 	@FXML
 	private Label departmentLabel;
@@ -63,7 +64,7 @@ public class HomeViewController
 	@FXML
 	private TableView<BP_Node> planTable;
 
-	public void setMain(Main main)
+	public void setMain(ViewInterface main)
 	{
 		this.main = main;
 	}
@@ -160,6 +161,7 @@ public class HomeViewController
 			if (node.department.equals(client.person.department))
 			{
 				plans.getItems().add(node.year);
+				System.out.println(plans.getItems().get(1).intValue());
 				dep_plans.add(node);
 			}
 		}
@@ -236,7 +238,7 @@ public class HomeViewController
 				client.deleteBP(plan);
 			}
 		}
-		main.showHome(client);
+		main.login(client);
 	}
 
 	@FXML

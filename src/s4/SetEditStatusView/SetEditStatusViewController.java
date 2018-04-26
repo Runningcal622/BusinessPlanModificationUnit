@@ -9,11 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import s4.Main;
+import s4.ViewInterface;
 
 public class SetEditStatusViewController
 {
 	private Client client;
-	private Main main;
+	private ViewInterface main;
 	private int year;
 	
 	@FXML
@@ -25,7 +26,7 @@ public class SetEditStatusViewController
 	@FXML
 	private ComboBox<String> selectStatus;
 	
-	public void setMain(Main main, Client client, int year)
+	public void setMain(ViewInterface main, Client client, int year)
 	{
 		this.main = main;
 		this.client = client;
@@ -38,7 +39,7 @@ public class SetEditStatusViewController
 	@FXML
 	void OnCancel(ActionEvent event)
 	{
-		main.showHome(client);
+		main.login(client);
 	}
 
 	@FXML
@@ -55,7 +56,7 @@ public class SetEditStatusViewController
 			client.business.setEditable(editable);
 		}
 		client.proxy.writeDisk();
-		main.showHome(client);
+		main.login(client);
 	}
 
 }

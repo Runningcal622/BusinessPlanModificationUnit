@@ -3,19 +3,25 @@ package s4.MainView;
 
 import Client.Client;
 import Server.Server;
+
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import s4.Main;
+import s4.ViewInterface;
 
-public class MainViewController
+public class MainViewController 
 {
 	Client client;
-	Main main;
+	//public int calledLogin;
+	//public Main main;
 	String port;
+	Stage stage;
+	public ViewInterface main;
 	
 	@FXML
 	private PasswordField pass;
@@ -40,19 +46,20 @@ public class MainViewController
 
 
 	
-	public void setMain(Main m)
+	public void setMain(ViewInterface m)
 	{
 		this.main=m;
 	}
+	
 	@FXML
 	void login()
 	{
 		client.login(username.getText(), pass.getText());
 		if (client.person != null)
 		{
-			main.showHome(client);
+			main.login(client);
 		}
-		
+
 	}
 
 	@FXML
@@ -81,6 +88,9 @@ public class MainViewController
     {
     	username.setPromptText("Enter username...");
 		pass.setPromptText("Enter password...");
-		main.stage.close();
+		//main.stage.close();
     }
+
+	
+
 }

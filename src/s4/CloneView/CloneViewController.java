@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import s4.Main;
+import s4.ViewInterface;
 
 public class CloneViewController implements Initializable
 {
@@ -26,12 +27,12 @@ public class CloneViewController implements Initializable
 	private Button okButton;
 
 	private Client client;
-	private Main main;
+	private ViewInterface main;
 	private BP_Node plan;
 	private ArrayList<BP_Node> allPlans;
 	private boolean new_plan;
 
-	public void setMain(Main m, Client c, BP_Node node, ArrayList<BP_Node> all, boolean new_plan)
+	public void setMain(ViewInterface m, Client c, BP_Node node, ArrayList<BP_Node> all, boolean new_plan)
 	{
 		this.main = m;
 		this.client = c;
@@ -51,7 +52,7 @@ public class CloneViewController implements Initializable
 	private void cancelAction()
 	{
 
-		main.showHome(client);
+		main.login(client);
 	}
 
 	@FXML
@@ -113,7 +114,7 @@ public class CloneViewController implements Initializable
 				client.make_BlankBP(new_year, client.person.department, edit);
 			}
 		}
-		main.showHome(client);
+		main.login(client);
 	}
 
 }

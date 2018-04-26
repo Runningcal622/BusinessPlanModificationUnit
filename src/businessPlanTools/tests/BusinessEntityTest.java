@@ -19,7 +19,7 @@ class BusinessEntityTest
 	}
 
 	@BeforeEach
-	void resetEntityFactory()
+	void testresetEntityFactory()
 	{
 		ArrayList<EntityStatement> defaultStatements = new ArrayList<EntityStatement>();
 		ArrayList<BusinessEntity> defaultSubentities = new ArrayList<BusinessEntity>();

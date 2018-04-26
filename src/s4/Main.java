@@ -18,13 +18,14 @@ import s4.MainView.MainViewController;
 import s4.NewUserView.NewUserViewController;
 import s4.SetEditStatusView.SetEditStatusViewController;
 
-public class Main extends Application
+public class Main extends Application implements ViewInterface
 {
 	public Stage stage;
 	Server server;
-	public BorderPane viewGoesHere;
-	
-	
+	public BorderPane viewGoesHere=new BorderPane();;
+	ViewInterface v;
+
+
 
 	@Override
 	public void start(Stage stage) throws Exception
@@ -53,12 +54,14 @@ public class Main extends Application
 		return stage;
 	}
 
-	public void showHome(Client client)
+	public void login(Client client)
 	{
+		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("HomeView/HomeView.fxml"));
 		try
 		{
+			
 			viewGoesHere.setCenter(loader.load());
 			HomeViewController cont = loader.getController();
 			cont.setUp(client);
@@ -113,6 +116,7 @@ public class Main extends Application
 
 	public static void main(String[] args)
 	{
+		
 		launch(args);
 	}
 
@@ -165,4 +169,5 @@ public class Main extends Application
 			e.printStackTrace();
 		}
 	}
+	
 }

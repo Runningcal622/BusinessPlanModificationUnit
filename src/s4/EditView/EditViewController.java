@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import s4.Main;
+import s4.ViewInterface;
 
 public class EditViewController
 {
@@ -46,11 +47,11 @@ public class EditViewController
 	private Button saveStatementButton;
 
 	private Client client;
-	private Main main;
+	private ViewInterface main;
 	// centre plan factory used to create new entities
 	CentrePlanFactory centreHead1 = new CentrePlanFactory();
 
-	public void setMain(Main m, Client c)
+	public void setMain(ViewInterface m, Client c)
 	{
 		this.main = m;
 		this.client = c;
@@ -108,7 +109,7 @@ public class EditViewController
 	{
 		client.writeLocalBP(client.business);
 		client.proxy.writeDisk();
-		main.showHome(client);
+		main.login(client);
 	}
 
 	private void clickedOn(TreeItem<BusinessEntity> newValue, BusinessEntity plan, TreeView<BusinessEntity> comp)

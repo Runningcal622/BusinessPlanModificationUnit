@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import s4.Main;
+import s4.ViewInterface;
 
 public class NewUserViewController implements Initializable {
 
@@ -33,10 +34,10 @@ public class NewUserViewController implements Initializable {
 	@FXML
 	private Button cancelButton;
 
-	private Main main;
+	public ViewInterface main;
 	private Client client;
 
-	public void setMain(Main m, Client c) {
+	public void setMain(ViewInterface m, Client c) {
 		this.main = m;
 		this.client = c;
 	}
@@ -63,7 +64,7 @@ public class NewUserViewController implements Initializable {
 		}
 		if (username.length() != 0 && password.length() != 0 && department.length() != 0 && admin != null) {
 			client.addPeople(username, password, department, admin);
-			main.showHome(client);
+			main.login(client);
 		}
 
 	}
@@ -71,7 +72,7 @@ public class NewUserViewController implements Initializable {
 	@FXML
 	private void cancelAction() {
 
-		main.showHome(client);
+		main.login(client);
 	}
 
 	// fxml code for dropdown box
