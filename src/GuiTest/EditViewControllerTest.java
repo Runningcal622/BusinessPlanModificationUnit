@@ -38,7 +38,10 @@ public class EditViewControllerTest // extend ApplicationTest
 	EditViewController cont;
 	String id;
 	RandomStringGenerator gener = new RandomStringGenerator(7);
-
+	int level;
+	ArrayList<TreeItem<BusinessEntity>> treeItems;
+	
+	
 	@Start
 	public void onStart(Stage stage) throws IOException
 	{
@@ -75,7 +78,7 @@ public class EditViewControllerTest // extend ApplicationTest
 		// stage.getScene().getRoot();
 		TreeView<BusinessEntity> head = cont.tree;
 		TreeItem<BusinessEntity> topLayer = head.getTreeItem(0);
-		ArrayList<TreeItem<BusinessEntity>> treeItems = new ArrayList<TreeItem<BusinessEntity>>();
+		treeItems = new ArrayList<TreeItem<BusinessEntity>>();
 		getAllChildren(topLayer, treeItems);
 		// run through and see all nodes and test each
 		for (TreeItem<BusinessEntity> item : treeItems)
@@ -83,6 +86,7 @@ public class EditViewControllerTest // extend ApplicationTest
 			id = item.getValue().toString();
 			System.out.println(id + 3);
 			robo.clickOn(id);
+			/// test each statement
 			if (cont.textArea.isVisible())
 			{
 				// change the statement
@@ -94,6 +98,7 @@ public class EditViewControllerTest // extend ApplicationTest
 		String tool = treeItems.get(treeItems.size() - 1).getValue().toString();
 		robo.clickOn(tool);
 		robo.clickOn("#delCompButton");
+		
 		/// clear the tree to get the updated tree
 		treeItems.clear();
 		getAllChildren(cont.tree.getRoot(), treeItems);
@@ -105,11 +110,22 @@ public class EditViewControllerTest // extend ApplicationTest
 		robo.clickOn(ran.getValue().toString());
 		robo.clickOn("#addCompButton");
 
+		
+	}
+	
+	@Test
+	public void please2(FxRobot robo)
+	{
+		
+		TreeItem<BusinessEntity> topLayer = cont.tree.getTreeItem(0);
+		treeItems = new ArrayList<TreeItem<BusinessEntity>>();
+		getAllChildren(topLayer, treeItems);
 		treeItems.clear();
 		getAllChildren(cont.tree.getRoot(), treeItems);
 		for (TreeItem<BusinessEntity> item : treeItems)
 		{
 			id = item.getValue().toString();
+			level = item.getValue().getTree_level();
 			robo.clickOn(item.getValue().toString());
 			changeEntityTitle(robo);
 		}
@@ -121,18 +137,29 @@ public class EditViewControllerTest // extend ApplicationTest
 		if (s.length() != 0)
 		{
 			robo.clickOn("#entityTitleField");
-
+			// delete title
 			robo.push(KeyCode.SHIFT, KeyCode.END);
 			robo.push(KeyCode.CONTROL, KeyCode.BACK_SPACE);
 			robo.push(KeyCode.CONTROL, KeyCode.BACK_SPACE);
 			robo.push(KeyCode.CONTROL, KeyCode.BACK_SPACE);
 
 			String random = gener.generateByRegex("\\w\\w\\w\\w\\w\\w");
-
+			// make random title
 			robo.write(random);
 			robo.clickOn("#changeTitleButton");
-			cont.tree.setShowRoot(true);
-			robo.clickOn(random);
+			
+			String root = cont.tree.getRoot().getValue().getEntityTitle();
+			treeItems.clear();
+			getAllChildren(cont.tree.getRoot() , treeItems);
+			for (TreeItem<BusinessEntity> bEntity: treeItems)
+			{
+				
+				if (bEntity.getValue().getEntityTitle().equals(random))
+				{
+					root = bEntity.getValue().getEntityTitle();
+				}
+			}
+			robo.clickOn(root.toString());
 			// assertEquals(random, cont.entityTitleField.getText());
 		}
 

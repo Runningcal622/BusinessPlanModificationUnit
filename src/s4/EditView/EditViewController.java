@@ -134,7 +134,8 @@ public class EditViewController
 			saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
 			addCompButton.setOnAction(e -> addComp(newValue));
 			delCompButton.setOnAction(e -> delComp(newValue));
-		} else
+		} 
+		else
 		{
 			hide();
 		}
