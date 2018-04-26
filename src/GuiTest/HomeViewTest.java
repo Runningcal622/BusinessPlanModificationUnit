@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import s4.Main;
+import s4.ViewInterface;
 import s4.MainView.MainViewController;
 import s4.HomeView.HomeViewController;
 import org.testfx.framework.junit5.*;
@@ -199,6 +200,18 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 	{
 		// TODO Auto-generated method stub
 		calledSetStatus++;
+	}
+	@Override
+	public void login(Client client)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void showLogin()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }
