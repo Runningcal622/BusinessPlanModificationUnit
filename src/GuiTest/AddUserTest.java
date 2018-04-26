@@ -180,6 +180,33 @@ class AddUserTest  extends ApplicationTest implements ViewInterface
 		assertEquals(c.person.admin,true);
 		assertEquals(c.person.department,"Math");
 	}
+	
+	@Test
+	void testAddUser2()
+	{
+		clickOn("#usernameField");
+		write("johnny");
+		clickOn("#passField");
+		write("kings");
+		clickOn("#depField");
+		write("English");
+		sleep(1000);
+		//clickOn("#AdminBox").type(KeyCode.UP).type(KeyCode.UP).type(KeyCode.ENTER);
+		sleep(1000);
+		clickOn("#okButton");
+		assertEquals(calledHome,1);
+		assertEquals(calledAddUser,0);
+		assertEquals(calledEditor,0);
+		assertEquals(calledClone,0);
+		assertEquals(calledClose,0);
+		calledHome=0;
+		Client c = new Client(server);
+		c.login("johnny", "kings");
+		assertEquals(c.person.password,"kings");
+		assertEquals(c.person.username,"johnny");
+		assertEquals(c.person.admin,false);
+		assertEquals(c.person.department,"English");
+	}
 
 	@Test
 	void testFailedAddUser1()
