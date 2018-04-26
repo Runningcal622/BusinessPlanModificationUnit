@@ -25,7 +25,7 @@ import s4.MainView.MainViewController;
 import s4.HomeView.HomeViewController;
 import org.testfx.framework.junit5.*;
 @ExtendWith(ApplicationExtension.class)
-public class HomeViewControllerTestSav implements ViewInterface // extend ApplicationTest
+public class HomeViewTest implements ViewInterface // extend ApplicationTest
 
 {
 	BorderPane viewGoesHere = new BorderPane();
