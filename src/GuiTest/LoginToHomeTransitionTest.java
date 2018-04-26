@@ -78,7 +78,7 @@ class LoginToHomeTransitionTest  extends ApplicationTest implements ViewInterfac
 	}
 	
 	@Test
-	void testLogin()
+	void testSuccessLogin()
 	{
 		clickOn("#username");
 		write("Caleb");
@@ -86,8 +86,54 @@ class LoginToHomeTransitionTest  extends ApplicationTest implements ViewInterfac
 		write("4C");
 		clickOn("#loginButton");
 		assertEquals(calledHome,1);
+		calledHome=0;
 	}
 
+	
+	@Test
+	void testFailedLogin1()
+	{
+		clickOn("#username");
+		write("Caleb");
+		clickOn("#pass");
+		write("wrong password");
+		clickOn("#loginButton");
+		assertEquals(calledHome,0);
+	}
+	
+	@Test
+	void testFailedLogin2()
+	{
+		assertEquals(calledHome,0);
+	}
+	
+//	@Test
+//	void testFailedLogin3()
+//	{
+//		clickOn("#username");
+//		write("Caleb");
+//		clickOn("#pass");
+//		write("4C");
+//		clickOn("#selectHost");
+//		clickOn("#loginButton");
+//		assertEquals(calledHome,0);
+//	}
+	
+	@Test
+	void testPortLogin()
+	{
+		clickOn("#username");
+		write("Caleb");
+		clickOn("#pass");
+		write("4C");
+		clickOn("#selectHost");
+		clickOn("#portNum");
+		write("2869");
+		clickOn("#loginButton");
+		assertEquals(calledHome,1);
+		calledHome=0;
+	}
+	
 	@Override
 	public void login(Client client)
 	{
