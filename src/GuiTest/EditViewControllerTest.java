@@ -7,6 +7,7 @@ import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -16,6 +17,7 @@ import org.testfx.framework.junit5.Start;
 import Client.Client;
 import Server.BusinessEntity;
 import Server.Server;
+import Server.starter;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,6 +42,7 @@ public class EditViewControllerTest // extend ApplicationTest
 	RandomStringGenerator gener = new RandomStringGenerator(7);
 	int level;
 	ArrayList<TreeItem<BusinessEntity>> treeItems;
+	Client client;
 	
 	
 	@Start
@@ -54,7 +57,7 @@ public class EditViewControllerTest // extend ApplicationTest
 			viewGoesHere.setCenter(loader.load());
 			cont = loader.getController();
 			Server server = new Server();
-			Client client = new Client(server);
+			client = new Client(server);
 			server.readDisk();
 			client.login("Caleb", "4C");
 			client.requestBusinessPlan("Math", 2016);
@@ -69,6 +72,14 @@ public class EditViewControllerTest // extend ApplicationTest
 			e.printStackTrace();
 		}
 		System.out.println("here");
+	}
+	
+	
+	@AfterAll
+	private static void finish()
+	{
+		starter s = new starter(); 
+		s.main(null);
 	}
 
 	@Test
@@ -98,7 +109,7 @@ public class EditViewControllerTest // extend ApplicationTest
 		String tool = treeItems.get(treeItems.size() - 1).getValue().toString();
 		robo.clickOn(tool);
 		robo.clickOn("#delCompButton");
-		
+
 		/// clear the tree to get the updated tree
 		treeItems.clear();
 		getAllChildren(cont.tree.getRoot(), treeItems);
@@ -109,14 +120,15 @@ public class EditViewControllerTest // extend ApplicationTest
 		TreeItem<BusinessEntity> ran = cont.tree.getTreeItem(3);
 		robo.clickOn(ran.getValue().toString());
 		robo.clickOn("#addCompButton");
-
 		
+		// show saves to disk work since it re-loads the plan for each new test
+		client.proxy.writeDisk();
 	}
-	
+
 	@Test
 	public void please2(FxRobot robo)
 	{
-		
+
 		TreeItem<BusinessEntity> topLayer = cont.tree.getTreeItem(0);
 		treeItems = new ArrayList<TreeItem<BusinessEntity>>();
 		getAllChildren(topLayer, treeItems);
@@ -129,6 +141,37 @@ public class EditViewControllerTest // extend ApplicationTest
 			robo.clickOn(item.getValue().toString());
 			changeEntityTitle(robo);
 		}
+	}
+////
+	
+	
+	/*
+	 * test add and delete
+	 */
+	@Test
+	public void please3(FxRobot robo)
+	{
+		treeItems = new ArrayList<TreeItem<BusinessEntity>>();
+		getAllChildren(cont.tree.getTreeItem(0), treeItems);
+
+		for (TreeItem<BusinessEntity> loop : treeItems)
+		{
+			robo.clickOn(loop.getValue().toString());
+			robo.clickOn("#addCompButton");
+		}
+
+		treeItems.clear();
+		getAllChildren(cont.tree.getTreeItem(0), treeItems);
+
+		for (int t = 0; t < treeItems.size(); t++)
+		{
+			if (treeItems.get(t).getValue().toString().contains("2"))
+			{
+				robo.clickOn(treeItems.get(t).getValue().toString());
+				robo.clickOn("#delCompButton");
+			}
+		}
+		
 	}
 
 	private void changeEntityTitle(FxRobot robo)
@@ -147,22 +190,29 @@ public class EditViewControllerTest // extend ApplicationTest
 			// make random title
 			robo.write(random);
 			robo.clickOn("#changeTitleButton");
-			
-			String root = cont.tree.getRoot().getValue().getEntityTitle();
-			treeItems.clear();
-			getAllChildren(cont.tree.getRoot() , treeItems);
-			for (TreeItem<BusinessEntity> bEntity: treeItems)
+			cont.tree.setVisible(true);
+			String root = cont.tree.getRoot().getValue().toString();
+
+			ArrayList<TreeItem<BusinessEntity>> inTrees = new ArrayList<TreeItem<BusinessEntity>>();
+
+			inTrees.clear();
+			getAllChildren(cont.tree.getRoot(), inTrees);
+			for (TreeItem<BusinessEntity> bEntity : inTrees)
 			{
-				
+
 				if (bEntity.getValue().getEntityTitle().equals(random))
 				{
-					root = bEntity.getValue().getEntityTitle();
+					root = bEntity.getValue().toString();
 				}
 			}
-			robo.clickOn(root.toString());
+
+			robo.clickOn(root);
 			// assertEquals(random, cont.entityTitleField.getText());
 		}
-
+		
+		
+		// to show changes stay throughout xml saving process
+		client.proxy.writeDisk();
 	}
 
 	private void getAllChildren(TreeItem<BusinessEntity> topLayer, ArrayList<TreeItem<BusinessEntity>> arrayList)
