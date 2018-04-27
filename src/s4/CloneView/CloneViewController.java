@@ -58,63 +58,61 @@ public class CloneViewController implements Initializable
 	@FXML
 	private void okAction()
 	{
-		String toYear = newYearField.getText();
-		String editStatus = statusBox.getValue();
-		boolean edit;
-		if (editStatus.equals("Editable"))
+		if (!(newYearField.getText().equals("")))
 		{
-			edit = true;
-		} else
-		{
-			edit = false;
-		}
-		// int yearToBeCloned = plan.year;
-		int new_year;
-		if (toYear.length() == 0)
-		{
-			new_year = -1;
-		} else
-		{
-			try
+			String toYear = newYearField.getText();
+
+			boolean edit = false;
+			if (statusBox.getValue().equals("Editable"))
 			{
-				new_year = Integer.parseInt(toYear);
-			} catch (Exception e)
+				edit = true;
+			}
+
+			// int yearToBeCloned = plan.year;
+			int new_year;
+			if (toYear.length() == 0)
+			{
+				new_year = -1;
+			} else
+			{
+				try
+				{
+					new_year = Integer.parseInt(toYear);
+				} catch (Exception e)
+				{
+					new_year = -1;
+				}
+			}
+			if (new_year < 1819 || new_year > 2050)
 			{
 				new_year = -1;
 			}
-		}
-		if (new_year < 1819 || new_year > 2050)
-		{
-			new_year = -1;
-		}
-		if (new_year != -1)
-		{
-			if (new_plan == false)
+			if (new_year != -1)
 			{
-				int yearToBeCloned = plan.year;
-				boolean duplicate = false;
-				for (BP_Node node : allPlans)
+				if (new_plan == false)
 				{
-					if (node.year == yearToBeCloned)
+					int yearToBeCloned = plan.year;
+					boolean duplicate = false;
+					for (BP_Node node : allPlans)
 					{
-						duplicate = true;
+						if (node.year == yearToBeCloned)
+						{
+							duplicate = true;
+						}
 					}
-				}
-				if (duplicate == false)
+					if (duplicate == false)
+					{
+						client.make_BlankBP(new_year, client.person.department, edit);
+					} else
+					{
+						client.make_CloneBP(yearToBeCloned, client.person.department, edit, new_year);
+					}
+				} else
 				{
 					client.make_BlankBP(new_year, client.person.department, edit);
-				} 
-				else
-				{
-					client.make_CloneBP(yearToBeCloned, client.person.department, edit, new_year);
 				}
-			} 
-			else
-			{
-				client.make_BlankBP(new_year, client.person.department, edit);
 			}
+			main.login(client);
 		}
-		main.login(client);
 	}
-
 }
