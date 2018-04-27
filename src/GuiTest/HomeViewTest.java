@@ -1,10 +1,6 @@
 package GuiTest;
 
 import static org.junit.Assert.assertEquals;
-//imports
-import static org.junit.Assert.assertThat;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,32 +11,26 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import Client.Client;
 import Server.BP_Node;
-import Server.BusinessEntity;
 import Server.Server;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import s4.Main;
 import s4.ViewInterface;
-import s4.MainView.MainViewController;
 import s4.HomeView.HomeViewController;
-import org.testfx.framework.junit5.*;
+
 
 @ExtendWith(ApplicationExtension.class)
 public class HomeViewTest implements ViewInterface // extend ApplicationTest
-
 {
 	BorderPane viewGoesHere = new BorderPane();
 	Stage stage;
@@ -310,5 +300,4 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 		// TODO Auto-generated method stub
 
 	}
-
 }
