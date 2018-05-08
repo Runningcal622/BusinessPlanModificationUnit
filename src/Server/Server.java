@@ -1,5 +1,4 @@
 package Server;
-import Client.*;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

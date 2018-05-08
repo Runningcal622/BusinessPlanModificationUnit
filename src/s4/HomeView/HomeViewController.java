@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -20,14 +19,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
-import s4.Main;
 import s4.ViewInterface;
+import s4.Commands.Command;
+import s4.Commands.setEditable;
+import s4.Commands.setUnedit;
 
 public class HomeViewController
 {
@@ -61,6 +58,15 @@ public class HomeViewController
 
 	@FXML
 	private Button setStatusButton;
+	
+	@FXML 
+	private Button seeUserButton;
+	
+	@FXML 
+	private void seeUser(ActionEvent event)
+	{
+		main.showSeeUser(client);
+	}
 
 	@FXML
 	private TableView<BP_Node> planTable;
@@ -153,6 +159,7 @@ public class HomeViewController
 		{
 			newUserButton.setVisible(false);
 			setStatusButton.setVisible(false);
+			seeUserButton.setVisible(false);
 		}
 	}
 	
@@ -248,7 +255,7 @@ public class HomeViewController
 				client.deleteBP(plan);
 			}
 		}
-		main.login(client);
+		main.showHome(client);
 	}
 
 	@FXML
@@ -286,7 +293,7 @@ public class HomeViewController
 	void OnSetStatus(ActionEvent event)
 	{
 		// set up the set status and add new user pages
-
+		Command setStatusAction;
 		int year = -1;
 		if (selectYear.getValue() == null)
 		{
@@ -298,7 +305,18 @@ public class HomeViewController
 		
 		if (year != -1)
 		{
-			main.showSetStatus(client,year);
+			client.requestBusinessPlan(client.person.getDepartment(), year);
+			if (client.business.isEditable())
+			{
+				setStatusAction = new setUnedit();
+			}
+			else
+			{
+				setStatusAction = new setEditable();
+			}
+			
+			setStatusAction.action(year, client);
+			main.showHome(client);
 		}
 	}
 

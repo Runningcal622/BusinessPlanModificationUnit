@@ -1,16 +1,17 @@
 package Client;
 
-import Server.*;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-import java.rmi.server.RemoteObject;
-import java.util.ArrayList;
+import java.io.FileOutputStream;
 import java.util.LinkedList;
+
+import Server.BP_Node;
+import Server.Person;
+import Server.ServerInterface;
 
 public class Client // extends RemoteObject
 {

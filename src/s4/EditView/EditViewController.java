@@ -6,14 +6,12 @@ import Client.Client;
 import Server.BP_Node;
 import Server.BusinessEntity;
 import Server.CentrePlanFactory;
-import Server.EntityStatement;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import s4.Main;
 import s4.ViewInterface;
 
 public class EditViewController
@@ -46,8 +44,12 @@ public class EditViewController
 	@FXML
 	private Button saveStatementButton;
 
+	@FXML
+	private TreeView commentTree;
+
 	private Client client;
 	private ViewInterface main;
+
 	// centre plan factory used to create new entities
 	CentrePlanFactory centreHead1 = new CentrePlanFactory();
 
@@ -66,6 +68,7 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
+		commentTree.setVisible(false);
 
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(client.business.entity);
@@ -73,6 +76,18 @@ public class EditViewController
 		first.setExpanded(true);
 		// the view
 		tree.setRoot(showPlan(client.business.entity.getSubentity(0), first));
+
+	}
+
+	private TreeItem forTree(TreeItem<String> firstComment)
+	{
+		TreeItem<String> piece;
+		for (int i = 1; i < client.business.getEntity().getComments().size(); i++)
+		{
+			piece = new TreeItem<String>(client.business.getEntity().getComments().get(i));
+			firstComment.getChildren().add(piece);
+		}
+		return firstComment;
 	}
 
 	public void setUp()
@@ -85,6 +100,7 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
+		commentTree.setVisible(false);
 
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(plan);
@@ -109,38 +125,53 @@ public class EditViewController
 	{
 		client.writeLocalBP(client.business);
 		client.proxy.writeDisk();
-		main.login(client);
+		main.showHome(client);
 	}
 
 	private void clickedOn(TreeItem<BusinessEntity> newValue, BusinessEntity plan, TreeView<BusinessEntity> comp)
 	{
 		if (client.business.editable)
 		{
-		textArea.setVisible(true);
-		entityTitleField.setVisible(true);
-		changeTitleButton.setVisible(true);
-		saveStatementButton.setVisible(true);
-		addCompButton.setVisible(true);
-		delCompButton.setVisible(true);
-		
-		// set up
-		if (newValue != null)
-		{
-			System.out.println(newValue.getValue().getStatement(0).getStatement());
-			System.out.println(newValue.getValue().getTreeItemID());
-			textArea.setText(newValue.getValue().getSentence());
-			entityTitleField.setText(newValue.getValue().getEntityTitle());
-			changeTitleButton.setOnAction(e -> changeETitle(newValue, entityTitleField.getText()));
-			saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
-			addCompButton.setOnAction(e -> addComp(newValue));
-			delCompButton.setOnAction(e -> delComp(newValue));
-		} 
-		else
-		{
-			hide();
-		}
-		}
-		else
+			textArea.setVisible(true);
+			entityTitleField.setVisible(true);
+			changeTitleButton.setVisible(true);
+			saveStatementButton.setVisible(true);
+			addCompButton.setVisible(true);
+			delCompButton.setVisible(true);
+			commentTree.setVisible(true);
+
+			// set up
+			if (newValue != null)
+			{
+				System.out.println(newValue.getValue().getStatement(0).getStatement());
+				System.out.println(newValue.getValue().getTreeItemID());
+				textArea.setText(newValue.getValue().getSentence());
+				entityTitleField.setText(newValue.getValue().getEntityTitle());
+				changeTitleButton.setOnAction(e -> changeETitle(newValue, entityTitleField.getText()));
+				saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
+				addCompButton.setOnAction(e -> addComp(newValue));
+				delCompButton.setOnAction(e -> delComp(newValue));
+				boolean found = false;
+				TreeItem<String> firstComment = null;
+				while (found == false)
+				{
+					BusinessEntity ent = client.business.getEntity();
+					if (ent.getTreeItemID() == newValue.getValue().getTreeItemID())
+					{
+						firstComment = new TreeItem<String>(ent.getComments().get(0));
+						found = true;
+					}
+				}
+				if (firstComment != null)
+				{
+					commentTree.setRoot(forTree(firstComment));
+				}
+
+			} else
+			{
+				hide();
+			}
+		} else
 		{
 			textArea.setVisible(true);
 			entityTitleField.setVisible(true);
@@ -160,7 +191,8 @@ public class EditViewController
 			subs.remove(newValue.getValue());
 			parent.setSubentities(subs);
 		}
-		client.writeLocalBP(client.business);;
+		client.writeLocalBP(client.business);
+		;
 		hide();
 	}
 
@@ -168,14 +200,15 @@ public class EditViewController
 	{
 		if (newValue.getValue().getSubentityFactory() != null)
 		{
-		BusinessEntity new_plan = newValue.getValue().createNewSubentity();
-		// set the factory to be the same depth as the factory in centreplanfactory
-		new_plan.setEntityFactory(centreHead1.getFactoryFromIndex(new_plan.getTree_level() + 1));
-		/// new tree view
-		BusinessEntity plan = client.business.entity;
-		client.business.entity = getHead(plan);
-		client.writeLocalBP(client.business);;
-		hide();
+			BusinessEntity new_plan = newValue.getValue().createNewSubentity();
+			// set the factory to be the same depth as the factory in centreplanfactory
+			new_plan.setEntityFactory(centreHead1.getFactoryFromIndex(new_plan.getTree_level() + 1));
+			/// new tree view
+			BusinessEntity plan = client.business.entity;
+			client.business.entity = getHead(plan);
+			client.writeLocalBP(client.business);
+			;
+			hide();
 		}
 	}
 
@@ -198,7 +231,8 @@ public class EditViewController
 		{
 
 			current.setSentence(text);
-			client.writeLocalBP(client.business);;
+			client.writeLocalBP(client.business);
+			;
 		}
 		hide();
 	}
@@ -207,7 +241,8 @@ public class EditViewController
 	{
 		BusinessEntity current = newValue.getValue();
 		current.setEntityTitle(text);
-		client.writeLocalBP(client.business);;
+		client.writeLocalBP(client.business);
+		;
 		hide();
 	}
 
@@ -258,6 +293,4 @@ public class EditViewController
 		return treeItem;
 	}
 
-	
-	
 }

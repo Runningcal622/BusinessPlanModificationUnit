@@ -57,7 +57,7 @@ public class MainViewController
 		client.login(username.getText(), pass.getText());
 		if (client.person != null)
 		{
-			main.login(client);
+			main.showHome(client);
 		}
 
 	}

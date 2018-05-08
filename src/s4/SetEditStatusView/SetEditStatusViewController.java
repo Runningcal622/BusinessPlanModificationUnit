@@ -39,7 +39,7 @@ public class SetEditStatusViewController
 	@FXML
 	void OnCancel(ActionEvent event)
 	{
-		main.login(client);
+		main.showHome(client);
 	}
 
 	@FXML
@@ -56,7 +56,7 @@ public class SetEditStatusViewController
 			client.business.setEditable(editable);
 		}
 		client.proxy.writeDisk();
-		main.login(client);
+		main.showHome(client);
 	}
 
 }

@@ -64,7 +64,7 @@ public class NewUserViewController implements Initializable {
 		}
 		if (username.length() != 0 && password.length() != 0 && department.length() != 0 && admin != null) {
 			client.addPeople(username, password, department, admin);
-			main.login(client);
+			main.showHome(client);
 		}
 
 	}
@@ -72,7 +72,7 @@ public class NewUserViewController implements Initializable {
 	@FXML
 	private void cancelAction() {
 
-		main.login(client);
+		main.showHome(client);
 	}
 
 	// fxml code for dropdown box

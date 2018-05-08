@@ -17,6 +17,7 @@ import s4.HomeView.HomeViewController;
 import s4.MainView.MainViewController;
 import s4.NewUserView.NewUserViewController;
 import s4.SetEditStatusView.SetEditStatusViewController;
+import s4.UserView.UserViewController;
 
 public class Main extends Application implements ViewInterface
 {
@@ -54,7 +55,7 @@ public class Main extends Application implements ViewInterface
 		return stage;
 	}
 
-	public void login(Client client)
+	public void showHome(Client client)
 	{
 		
 		FXMLLoader loader = new FXMLLoader();
@@ -168,6 +169,24 @@ public class Main extends Application implements ViewInterface
 		{
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void showSeeUser(Client client)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("UserView/UserView.fxml"));
+		try
+		{
+			viewGoesHere.setCenter(loader.load());
+			UserViewController cont = loader.getController();
+			cont.setMain(this,client);
+			cont.setUp();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 	
 }

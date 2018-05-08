@@ -135,7 +135,7 @@ class LoginToHomeTransitionTest  extends ApplicationTest implements ViewInterfac
 	}
 	
 	@Override
-	public void login(Client client)
+	public void showHome(Client client)
 	{
 		calledHome++;
 	}
@@ -173,6 +173,13 @@ class LoginToHomeTransitionTest  extends ApplicationTest implements ViewInterfac
 	{
 		// TODO Auto-generated method stub
 		calledSetStatus++;
+	}
+
+	@Override
+	public void showSeeUser(Client client)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

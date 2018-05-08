@@ -52,7 +52,7 @@ public class CloneViewController implements Initializable
 	private void cancelAction()
 	{
 
-		main.login(client);
+		main.showHome(client);
 	}
 
 	@FXML
@@ -112,7 +112,7 @@ public class CloneViewController implements Initializable
 					client.make_BlankBP(new_year, client.person.department, edit);
 				}
 			}
-			main.login(client);
+			main.showHome(client);
 		}
 	}
 }

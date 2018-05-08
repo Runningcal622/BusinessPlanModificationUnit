@@ -65,6 +65,7 @@
                                  </HBox.margin>
                               </Button>
                               <Button fx:id="newUserButton" mnemonicParsing="false" onAction="#OnAddNewUser" text="Add New User" />
+                              <Button fx:id="seeUserButton" mnemonicParsing="false" onAction="#seeUser" text="See users" translateX="10.0" />
                            </children>
                         </HBox>
                      </children>

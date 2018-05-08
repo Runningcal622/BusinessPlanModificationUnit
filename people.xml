@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_171" class="java.beans.XMLDecoder">
+<java version="9.0.4" class="java.beans.XMLDecoder">
  <object class="java.util.LinkedList">
   <void method="add">
    <object class="Server.Person" id="Person0">
@@ -61,6 +61,88 @@
      <void method="set">
       <object idref="Person1"/>
       <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person2">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <string>Manny</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <string>4C</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person2"/>
+      <string>Math</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person3">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <string>R</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <string>manny</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <string>Computer Science</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>admin</string>
+     <void method="set">
+      <object idref="Person3"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Server.Person" id="Person4">
+    <void class="Server.Person" method="getField">
+     <string>username</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <string>m</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>password</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <string>mm</string>
+     </void>
+    </void>
+    <void class="Server.Person" method="getField">
+     <string>department</string>
+     <void method="set">
+      <object idref="Person4"/>
+      <string>Computer Science</string>
      </void>
     </void>
    </object>

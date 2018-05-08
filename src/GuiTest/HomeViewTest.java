@@ -290,7 +290,7 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 	}
 
 	@Override
-	public void login(Client client)
+	public void showHome(Client client)
 	{
 		// TODO Auto-generated method stub
 
@@ -301,5 +301,12 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void showSeeUser(Client client)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -288,7 +288,7 @@ class AddUserTest  extends ApplicationTest implements ViewInterface
 	}
 	
 	@Override
-	public void login(Client client)
+	public void showHome(Client client)
 	{
 		// TODO Auto-generated method stub
 		calledHome++;
@@ -313,6 +313,13 @@ class AddUserTest  extends ApplicationTest implements ViewInterface
 	{
 		// TODO Auto-generated method stub
 		calledSetStatus++;
+	}
+
+	@Override
+	public void showSeeUser(Client client)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

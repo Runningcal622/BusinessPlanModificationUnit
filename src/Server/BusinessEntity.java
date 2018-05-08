@@ -1,10 +1,10 @@
 package Server;
 
-import java.util.*;
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javafx.scene.control.TreeView;
 
 public class BusinessEntity implements Serializable
 {
@@ -19,6 +19,7 @@ public class BusinessEntity implements Serializable
 	// This must be public for serialization to work
 	public EntityFactory subentityFactory;
 	String sentence;
+	ArrayList<String> comments;
 
 	public BusinessEntity(String entityTitle, ArrayList<EntityStatement> statements,
 			ArrayList<BusinessEntity> subentities, BusinessEntity parentEntity, EntityFactory subentityFactory)
@@ -32,10 +33,36 @@ public class BusinessEntity implements Serializable
 		tree_level = 0;
 		component_number = 1;
 		this.sentence = statements.get(0).getStatement();
+		this.comments = new ArrayList<String>();
 	}
 
-	
-	
+	/**
+	 * @return the comments
+	 */
+	public ArrayList<String> getComments()
+	{
+		return comments;
+	}
+
+	/**
+	 * @param comments
+	 *            the comments to set
+	 */
+	public void setComments(ArrayList<String> comments)
+	{
+		this.comments = comments;
+	}
+
+	public void addComment(String comm)
+	{
+		this.comments.add(comm);
+	}
+
+	public void remComment(int index)
+	{
+		this.comments.remove(index - 1);
+	}
+
 	/**
 	 * @return the sentence
 	 */
@@ -44,17 +71,14 @@ public class BusinessEntity implements Serializable
 		return sentence;
 	}
 
-
-
 	/**
-	 * @param sentence the sentence to set
+	 * @param sentence
+	 *            the sentence to set
 	 */
 	public void setSentence(String sentence)
 	{
 		this.sentence = sentence;
 	}
-
-
 
 	// Need a default constructor for serialization
 	public BusinessEntity()
@@ -66,8 +90,8 @@ public class BusinessEntity implements Serializable
 	public BusinessEntity createNewSubentity()
 	{
 		BusinessEntity newEntity = subentityFactory.nextLayer(this);
-		newEntity.component_number = newEntity.parentEntity.getSubentities().size()+1;
-		newEntity.tree_level = newEntity.parentEntity.tree_level+1;
+		newEntity.component_number = newEntity.parentEntity.getSubentities().size() + 1;
+		newEntity.tree_level = newEntity.parentEntity.tree_level + 1;
 		subentities.add(newEntity);
 		return newEntity;
 	}
@@ -121,7 +145,7 @@ public class BusinessEntity implements Serializable
 	{
 		this.subentityFactory = subFactory;
 	}
-	
+
 	/**
 	 * @return the tree_level
 	 */
@@ -131,7 +155,8 @@ public class BusinessEntity implements Serializable
 	}
 
 	/**
-	 * @param tree_level the tree_level to set
+	 * @param tree_level
+	 *            the tree_level to set
 	 */
 	public void setTree_level(int tree_level)
 	{
@@ -147,18 +172,19 @@ public class BusinessEntity implements Serializable
 	}
 
 	/**
-	 * @param component_number the component_number to set
+	 * @param component_number
+	 *            the component_number to set
 	 */
 	public void setComponent_number(int component_number)
 	{
 		this.component_number = component_number;
 	}
-	
+
 	public int getTreeItemID()
 	{
 		String id_string = Integer.toString(tree_level) + Integer.toString(component_number);
-		//System.out.println(tree_level);
-		//System.out.println(component_number);
+		// System.out.println(tree_level);
+		// System.out.println(component_number);
 		return Integer.parseInt(id_string);
 	}
 
@@ -275,15 +301,15 @@ public class BusinessEntity implements Serializable
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return entityTitle+" "+this.component_number;
+		return entityTitle + " " + this.component_number;
 	}
-	
-	
 
 }
