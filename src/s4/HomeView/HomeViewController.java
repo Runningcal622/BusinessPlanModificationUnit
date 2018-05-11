@@ -2,9 +2,11 @@ package s4.HomeView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import Client.Client;
 import Server.BP_Node;
+import Server.Person;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -58,11 +60,11 @@ public class HomeViewController
 
 	@FXML
 	private Button setStatusButton;
-	
-	@FXML 
+
+	@FXML
 	private Button seeUserButton;
-	
-	@FXML 
+
+	@FXML
 	private void seeUser(ActionEvent event)
 	{
 		main.showSeeUser(client);
@@ -106,7 +108,7 @@ public class HomeViewController
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<BP_Node, String> n)
 			{
-				
+
 				return new ReadOnlyStringWrapper(String.valueOf(n.getValue().getYear()));
 			}
 		});
@@ -128,9 +130,32 @@ public class HomeViewController
 			}
 		});
 
-		planTable.getColumns().addAll(title_column, year_column, status_column);
-		
-		// Deselect the row if the row has already been clicked
+		// change happened column
+		TableColumn<BP_Node, String> change_column = new TableColumn<BP_Node, String>("Changed");
+		change_column.setCellValueFactory(new Callback<CellDataFeatures<BP_Node, String>, ObservableValue<String>>()
+		{
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<BP_Node, String> n)
+			{
+				String toReturn = "Not changed";
+				Person user = client.person;
+				for (Entry<BP_Node, Boolean> e : user.nodeToChange.entrySet())
+				{
+					if (e.getKey().equals(n.getValue()))
+					{
+						if (e.getValue() == true)
+						{
+							toReturn = "Changed";
+						}
+					}
+				}
+				return new ReadOnlyStringWrapper(toReturn);
+			}
+		});
+
+		planTable.getColumns().addAll(title_column, year_column, status_column, change_column);
+
+		// Deselect the row if the row has already been clickez
 		planTable.setRowFactory(new Callback<TableView<BP_Node>, TableRow<BP_Node>>()
 		{
 			@Override
@@ -154,15 +179,15 @@ public class HomeViewController
 				return row;
 			}
 		});
-		
-		if(!client.person.isAdmin())
+
+		if (!client.person.isAdmin())
 		{
 			newUserButton.setVisible(false);
 			setStatusButton.setVisible(false);
 			seeUserButton.setVisible(false);
 		}
 	}
-	
+
 	public TableView<BP_Node> getTable()
 	{
 		return planTable;
@@ -196,7 +221,6 @@ public class HomeViewController
 
 		if (clone_year != -1)
 		{
-			System.out.println("in if statement");
 			client.requestBusinessPlan(client.person.getDepartment(), clone_year);
 			main.showClone(client.business, client, dep_plans, false);
 		}
@@ -234,7 +258,7 @@ public class HomeViewController
 			{
 				if (node.getDepartment().equalsIgnoreCase(client.person.getDepartment()) && node.year == delete_year)
 				{
-					//do nothing
+					// do nothing
 				} else if (node.getDepartment().equalsIgnoreCase(client.person.getDepartment()))
 				{
 					index++;
@@ -252,6 +276,11 @@ public class HomeViewController
 		{
 			if (plan.year == ye)
 			{
+				for (Person w : plan.observers)
+				{
+					Person p = (Person) w;
+					p.remToChange(plan);
+				}
 				client.deleteBP(plan);
 			}
 		}
@@ -280,6 +309,15 @@ public class HomeViewController
 	@FXML
 	void OnLogout(ActionEvent event)
 	{
+		/// chnages that were recent are not shown
+		for (BP_Node plan: client.getBP())
+		{
+			if (plan.department.equals(client.person.getDepartment()))
+			{
+				client.person.unUpdate(plan);
+			}
+		}
+		client.proxy.writeDisk();
 		main.showLogin();
 	}
 
@@ -302,19 +340,18 @@ public class HomeViewController
 		{
 			year = selectYear.getValue();
 		}
-		
+
 		if (year != -1)
 		{
 			client.requestBusinessPlan(client.person.getDepartment(), year);
 			if (client.business.isEditable())
 			{
 				setStatusAction = new setUnedit();
-			}
-			else
+			} else
 			{
 				setStatusAction = new setEditable();
 			}
-			
+
 			setStatusAction.action(year, client);
 			main.showHome(client);
 		}

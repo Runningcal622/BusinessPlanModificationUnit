@@ -6,12 +6,12 @@ import java.util.ResourceBundle;
 
 import Client.Client;
 import Server.BP_Node;
+import Server.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import s4.Main;
 import s4.ViewInterface;
 
 public class CloneViewController implements Initializable
@@ -103,15 +103,24 @@ public class CloneViewController implements Initializable
 					if (duplicate == false)
 					{
 						client.make_BlankBP(new_year, client.person.department, edit);
+						
 					} else
 					{
 						client.make_CloneBP(yearToBeCloned, client.person.department, edit, new_year);
 					}
 				} else
 				{
-					client.make_BlankBP(new_year, client.person.department, edit);
+					client.make_BlankBP(new_year, client.person.department, edit);		
+				}
+				client.proxy.writeDisk();
+				client.proxy.readDisk();
+				for (Person p : client.proxy.getPeople())
+				{
+					client.requestBusinessPlan(client.person.department, new_year);
+					client.business.addWatcher(p);
 				}
 			}
+			
 			main.showHome(client);
 		}
 	}

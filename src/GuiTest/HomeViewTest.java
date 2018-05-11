@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -47,6 +47,12 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 	int calledSetStatus;
 
 	ObservableList<Node> table_rows;
+	@BeforeAll
+	public static void StartemUp()
+	{
+		starter s =new starter();
+		s.main(null);
+	}
 
 	@Start
 	public void onStart(Stage stage) throws IOException
@@ -169,7 +175,6 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 		assertEquals(calledAddUser, 0);
 		assertEquals(calledEditor, 0);
 		assertEquals(calledClone, 0);
-		assertEquals(calledSetStatus, 1);
 		calledSetStatus = 0;
 	}
 
@@ -208,7 +213,7 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 		dep_plans = get_DepPlans(client.getBP());
 	}
 
-	@Test
+	//@Test
 	public void TestTableSetStatus(FxRobot robo)
 	{
 		ArrayList<BP_Node> dep_plans = get_DepPlans(client.getBP());
@@ -259,6 +264,28 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 		assertEquals(calledClone, 1);
 		assertEquals(calledSetStatus, 0);
 		calledClone = 0;
+	}
+	
+	@Test
+	public void TestStatus(FxRobot robo) 
+	{
+		ArrayList<BP_Node> dep_plans = get_DepPlans(client.getBP());
+		robo.clickOn(String.valueOf(dep_plans.get(0).getYear()));
+		BP_Node plan = dep_plans.get(0);
+		if (plan.isEditable())
+		{
+			robo.clickOn("#setStatusButton");
+			dep_plans = get_DepPlans(client.getBP());
+			plan = dep_plans.get(0);
+			assertEquals(false , plan.isEditable());
+		}
+		else
+		{
+			robo.clickOn("#setStatusButton");
+			dep_plans = get_DepPlans(client.getBP());
+			plan = dep_plans.get(0);
+			assertEquals(true , plan.isEditable());
+		}
 	}
 
 	@Override

@@ -1,11 +1,13 @@
 package s4.EditView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import Client.Client;
 import Server.BP_Node;
 import Server.BusinessEntity;
 import Server.CentrePlanFactory;
+import Server.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -45,7 +47,7 @@ public class EditViewController
 	private Button saveStatementButton;
 
 	@FXML
-	private TreeView commentTree;
+	private TreeView<String> commentTree;
 
 	private Client client;
 	private ViewInterface main;
@@ -117,6 +119,13 @@ public class EditViewController
 
 	private void logout()
 	{
+		for (BP_Node plan: client.getBP())
+		{
+			if (plan.department.equals(client.person.getDepartment()))
+			{
+				client.person.unUpdate(plan);
+			}
+		}
 		client.proxy.writeDisk();
 		main.showLogin();
 	}
@@ -138,7 +147,7 @@ public class EditViewController
 			saveStatementButton.setVisible(true);
 			addCompButton.setVisible(true);
 			delCompButton.setVisible(true);
-			commentTree.setVisible(true);
+			// commentTree.setVisible(true);
 
 			// set up
 			if (newValue != null)
@@ -152,20 +161,20 @@ public class EditViewController
 				addCompButton.setOnAction(e -> addComp(newValue));
 				delCompButton.setOnAction(e -> delComp(newValue));
 				boolean found = false;
-				TreeItem<String> firstComment = null;
-				while (found == false)
-				{
-					BusinessEntity ent = client.business.getEntity();
-					if (ent.getTreeItemID() == newValue.getValue().getTreeItemID())
-					{
-						firstComment = new TreeItem<String>(ent.getComments().get(0));
-						found = true;
-					}
-				}
-				if (firstComment != null)
-				{
-					commentTree.setRoot(forTree(firstComment));
-				}
+				// TreeItem<String> firstComment = null;
+				// while (found == false)
+				// {
+				// BusinessEntity ent = client.business.getEntity();
+				// if (ent.getTreeItemID() == newValue.getValue().getTreeItemID())
+				// {
+				// firstComment = new TreeItem<String>(ent.getComments().get(0));
+				// found = true;
+				// }
+				// }
+				// if (firstComment != null)
+				// {
+				// commentTree.setRoot(forTree(firstComment));
+				// }
 
 			} else
 			{
@@ -191,9 +200,22 @@ public class EditViewController
 			subs.remove(newValue.getValue());
 			parent.setSubentities(subs);
 		}
-		client.writeLocalBP(client.business);
-		;
+		updatePeople(client.business);
+		client.proxy.writeDisk();
 		hide();
+	}
+
+	// updates all users who should be
+	private void updatePeople(BP_Node node)
+	{
+		LinkedList<Person> aList = client.proxy.getPeople();
+		for (Person p : aList)
+		{
+			if (p.department.equals(client.person.department) && !p.getUsername().equals(client.person.getUsername()))
+			{
+				p.update(node);
+			}
+		}
 	}
 
 	private void addComp(TreeItem<BusinessEntity> newValue)
@@ -206,8 +228,9 @@ public class EditViewController
 			/// new tree view
 			BusinessEntity plan = client.business.entity;
 			client.business.entity = getHead(plan);
-			client.writeLocalBP(client.business);
-			;
+			updatePeople(client.business);
+			client.proxy.writeDisk();
+			client.proxy.readDisk();
 			hide();
 		}
 	}
@@ -230,9 +253,10 @@ public class EditViewController
 		if (newValue.getValue().getTreeItemID() == (current.getTreeItemID()))
 		{
 
-			current.setSentence(text);
-			client.writeLocalBP(client.business);
-			;
+			current.setSentence(text);	
+			updatePeople(client.business);
+			client.proxy.writeDisk();
+			client.proxy.readDisk();
 		}
 		hide();
 	}
@@ -241,8 +265,9 @@ public class EditViewController
 	{
 		BusinessEntity current = newValue.getValue();
 		current.setEntityTitle(text);
-		client.writeLocalBP(client.business);
-		;
+		updatePeople(client.business);
+		client.proxy.writeDisk();
+		client.proxy.readDisk();
 		hide();
 	}
 

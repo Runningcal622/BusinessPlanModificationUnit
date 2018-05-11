@@ -71,10 +71,22 @@ public class starter
 		Person caleb = new Person("Caleb","4C","Math",true);
 		Person alex = new Person("Alex" ,"Beta","Computer Science",true);
 		
+		plan1.addWatcher(caleb);
+		plan2.addWatcher(caleb);
+		plan3.addWatcher(caleb);
+		System.out.println(plan1.getObservers().get(0));
+		assert(plan1.getObservers().contains(caleb));
+		
+		
+		plan4.addWatcher(alex);
+		plan5.addWatcher(alex);
+		plan6.addWatcher(alex);
 		server.addPerson(caleb);
 		server.addPerson(alex);
 		
 		server.writeDisk();
-		
+		server.readDisk();
+		System.out.println(plan1.getObservers().get(0));
+
 	}
 }
