@@ -1,6 +1,8 @@
 package s4.UserView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import Client.Client;
 import Server.Person;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -144,7 +146,7 @@ public class UserViewController
 			}
 		});
 
-		tableViewer.getColumns().addAll(name_Column, dep_Column, admin_Column);
+		tableViewer.getColumns().addAll(Arrays.asList(name_Column, dep_Column, admin_Column));
 
 		// Deselect the row if the row has already been clicked
 		tableViewer.setRowFactory(new Callback<TableView<Person>, TableRow<Person>>()

@@ -1,7 +1,6 @@
 package Server;
 import java.rmi.Remote;
 import java.util.LinkedList;
-import Client.*;
 public interface ServerInterface extends Remote 
 {
 	public void addPerson(Person person);

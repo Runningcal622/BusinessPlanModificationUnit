@@ -43,7 +43,7 @@ public class Main extends Application implements ViewInterface
 		cont.setServer(server);	
 		
 		showLogin();
-		Scene s = new Scene(viewGoesHere);
+		Scene s = new Scene(viewGoesHere,800,600);
 		stage.setScene(s);
 		stage.setTitle("Business plan modification unit");
 		stage.show();

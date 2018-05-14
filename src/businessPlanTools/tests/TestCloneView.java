@@ -1,35 +1,21 @@
 package businessPlanTools.tests;
 
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxRobotInterface;
-import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit5.ApplicationExtension;
+import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.ComboBoxMatchers;
 
 import Client.Client;
 import Server.BP_Node;
-import Server.BusinessEntity;
-import Server.CentrePlanFactory;
-import Server.Person;
 import Server.Server;
-import Server.starter;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -131,7 +117,6 @@ public class TestCloneView<T> extends ApplicationTest
 		// server.addPerson(alex);
 		//
 		// server.writeDisk();
-		starter starter = new starter();
 		this.stage = stage;
 
 		FXMLLoader loader = new FXMLLoader();
@@ -149,8 +134,6 @@ public class TestCloneView<T> extends ApplicationTest
 		cont.setMain(new Main());
 		server = new Server();
 		cont.setServer(server);
-		Main m = new Main();
-		// showLogin();
 		client = new Client(server);
 		client.login("Alex", "Beta");
 
@@ -326,7 +309,7 @@ public class TestCloneView<T> extends ApplicationTest
 	@Test
 	void testOptions()
 	{
-		ComboBox box = lookup("#statusBox").query();
+		ComboBox<Integer> box = lookup("#statusBox").query();
 		assertThat(box, ComboBoxMatchers.containsExactlyItems("Editable", "Not Editable"));
 	}
 }

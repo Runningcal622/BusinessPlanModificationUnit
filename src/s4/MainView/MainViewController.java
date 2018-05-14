@@ -3,15 +3,13 @@ package s4.MainView;
 
 import Client.Client;
 import Server.Server;
-
-import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import s4.Main;
 import s4.ViewInterface;
 
 public class MainViewController 

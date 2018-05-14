@@ -1,21 +1,17 @@
 package GuiTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
 
 import Client.Client;
 import Server.BP_Node;
 import Server.Server;
-import Server.starter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -42,7 +38,6 @@ class LoginToHomeTransitionTest  extends ApplicationTest implements ViewInterfac
 	public void start(Stage stage)
 	{
 		
-		starter starter = new starter();
 		this.stage = stage;
 		server = new Server();
 		FXMLLoader loader = new FXMLLoader();

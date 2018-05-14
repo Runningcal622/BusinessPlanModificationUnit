@@ -191,7 +191,7 @@ public class Server implements ServerInterface
 		} catch (FileNotFoundException e) {
 			
 		}
-		people = (LinkedList<Person>)decoder.readObject();
+		people = (LinkedList<Person>) decoder.readObject();
 		decoder.close();
 	}
 	

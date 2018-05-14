@@ -8,17 +8,24 @@ import Server.BP_Node;
 import Server.BusinessEntity;
 import Server.CentrePlanFactory;
 import Server.Person;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.TextFieldListCell;
 import s4.ViewInterface;
 
 public class EditViewController
 {
 
+	@FXML
+	private Button addComButton;
+	@FXML
+	private Button remComButton;
 	@FXML
 	public TreeView<BusinessEntity> tree;
 
@@ -47,7 +54,7 @@ public class EditViewController
 	private Button saveStatementButton;
 
 	@FXML
-	private TreeView<String> commentTree;
+	private ListView<String> commentView;
 
 	private Client client;
 	private ViewInterface main;
@@ -70,7 +77,9 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
-		commentTree.setVisible(false);
+		addComButton.setVisible(false);
+		remComButton.setVisible(false);
+		commentView.setVisible(false);
 
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(client.business.entity);
@@ -79,17 +88,6 @@ public class EditViewController
 		// the view
 		tree.setRoot(showPlan(client.business.entity.getSubentity(0), first));
 
-	}
-
-	private TreeItem forTree(TreeItem<String> firstComment)
-	{
-		TreeItem<String> piece;
-		for (int i = 1; i < client.business.getEntity().getComments().size(); i++)
-		{
-			piece = new TreeItem<String>(client.business.getEntity().getComments().get(i));
-			firstComment.getChildren().add(piece);
-		}
-		return firstComment;
 	}
 
 	public void setUp()
@@ -102,10 +100,16 @@ public class EditViewController
 		saveStatementButton.setVisible(false);
 		addCompButton.setVisible(false);
 		delCompButton.setVisible(false);
-		commentTree.setVisible(false);
+		addComButton.setVisible(false);
+		remComButton.setVisible(false);
+		commentView.setVisible(false);
+		commentView.setEditable(true);
+
+		commentView.setCellFactory(TextFieldListCell.forListView());
 
 		/// this is how the plan component visual display is organized
 		TreeItem<BusinessEntity> first = new TreeItem<BusinessEntity>(plan);
+
 		// make the tree always fully expanded for convienence
 		first.setExpanded(true);
 		// the view
@@ -119,7 +123,7 @@ public class EditViewController
 
 	private void logout()
 	{
-		for (BP_Node plan: client.getBP())
+		for (BP_Node plan : client.getBP())
 		{
 			if (plan.department.equals(client.person.getDepartment()))
 			{
@@ -130,6 +134,7 @@ public class EditViewController
 		main.showLogin();
 	}
 
+	/// saves plan and goes back to home
 	private void backAction()
 	{
 		client.writeLocalBP(client.business);
@@ -137,8 +142,10 @@ public class EditViewController
 		main.showHome(client);
 	}
 
+	// when a component of the plan is selected
 	private void clickedOn(TreeItem<BusinessEntity> newValue, BusinessEntity plan, TreeView<BusinessEntity> comp)
 	{
+
 		if (client.business.editable)
 		{
 			textArea.setVisible(true);
@@ -147,6 +154,8 @@ public class EditViewController
 			saveStatementButton.setVisible(true);
 			addCompButton.setVisible(true);
 			delCompButton.setVisible(true);
+			addComButton.setVisible(true);
+			remComButton.setVisible(true);
 			// commentTree.setVisible(true);
 
 			// set up
@@ -160,22 +169,25 @@ public class EditViewController
 				saveStatementButton.setOnAction(e -> saveStatement(newValue, textArea.getText()));
 				addCompButton.setOnAction(e -> addComp(newValue));
 				delCompButton.setOnAction(e -> delComp(newValue));
-				boolean found = false;
-				// TreeItem<String> firstComment = null;
-				// while (found == false)
-				// {
-				// BusinessEntity ent = client.business.getEntity();
-				// if (ent.getTreeItemID() == newValue.getValue().getTreeItemID())
-				// {
-				// firstComment = new TreeItem<String>(ent.getComments().get(0));
-				// found = true;
-				// }
-				// }
-				// if (firstComment != null)
-				// {
-				// commentTree.setRoot(forTree(firstComment));
-				// }
+				commentView.setVisible(true);
+				commentView.getItems().clear();
+				commentView.getItems().addAll(newValue.getValue().getComments());
+				addComButton.setOnAction(e -> addComment(newValue.getValue()));
+				remComButton.setOnAction(e -> remComment(newValue.getValue()));
+				commentView.setOnEditCommit(new EventHandler<ListView.EditEvent<String>>()
+				{
+					@Override
+					public void handle(ListView.EditEvent<String> t)
+					{
+						commentView.getItems().set(t.getIndex(), client.person.getUsername()+": "+t.getNewValue());
+						newValue.getValue().getComments().remove(t.getIndex());
+						newValue.getValue().getComments().add(t.getIndex(), client.person.getUsername()+": "+t.getNewValue());
+						client.proxy.writeDisk();
+						client.proxy.readDisk();
+						System.out.println("setOnEditCommit");
+					}
 
+				});
 			} else
 			{
 				hide();
@@ -188,6 +200,41 @@ public class EditViewController
 			entityTitleField.setText(newValue.getValue().getEntityTitle());
 
 		}
+		
+		
+
+	}
+
+	private void action()
+	{
+		System.out.println(commentView.getSelectionModel().selectedIndexProperty().getValue());
+	}
+
+	private void addComment(BusinessEntity entity)
+	{
+		int indexToAdd = commentView.getSelectionModel().getSelectedIndex();
+		if (indexToAdd != -1)
+		{
+			entity.getComments().add(indexToAdd+1, "New comment here");
+		}
+		updatePeople(client.business);
+		commentView.getItems().clear();
+		commentView.getItems().addAll(entity.getComments());
+		
+		client.proxy.writeDisk();
+	}
+
+	private void remComment(BusinessEntity entity)
+	{
+		int indexToAdd = commentView.getSelectionModel().getSelectedIndex();
+		if (indexToAdd != -1)
+		{
+			entity.getComments().remove(indexToAdd);
+		}
+		updatePeople(client.business);
+		commentView.getItems().clear();
+		commentView.getItems().addAll(entity.getComments());
+		client.proxy.writeDisk();
 	}
 
 	private void delComp(TreeItem<BusinessEntity> newValue)
@@ -253,7 +300,7 @@ public class EditViewController
 		if (newValue.getValue().getTreeItemID() == (current.getTreeItemID()))
 		{
 
-			current.setSentence(text);	
+			current.setSentence(text);
 			updatePeople(client.business);
 			client.proxy.writeDisk();
 			client.proxy.readDisk();

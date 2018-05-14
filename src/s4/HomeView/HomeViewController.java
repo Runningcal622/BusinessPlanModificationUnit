@@ -1,6 +1,7 @@
 package s4.HomeView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -153,7 +154,7 @@ public class HomeViewController
 			}
 		});
 
-		planTable.getColumns().addAll(title_column, year_column, status_column, change_column);
+		planTable.getColumns().addAll(Arrays.asList(title_column, year_column, status_column, change_column));
 
 		// Deselect the row if the row has already been clickez
 		planTable.setRowFactory(new Callback<TableView<BP_Node>, TableRow<BP_Node>>()

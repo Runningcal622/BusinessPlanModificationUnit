@@ -1,9 +1,7 @@
 package Server;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class BP_Node implements Serializable
 {

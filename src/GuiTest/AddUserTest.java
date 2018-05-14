@@ -1,16 +1,14 @@
 package GuiTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
 
 import Client.Client;
 import Server.BP_Node;
@@ -18,7 +16,6 @@ import Server.BusinessEntity;
 import Server.CentrePlanFactory;
 import Server.Person;
 import Server.Server;
-import Server.starter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -26,8 +23,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import s4.Main;
 import s4.ViewInterface;
-import s4.CloneView.CloneViewController;
-import s4.MainView.MainViewController;
 import s4.NewUserView.NewUserViewController;
 
 class AddUserTest  extends ApplicationTest implements ViewInterface

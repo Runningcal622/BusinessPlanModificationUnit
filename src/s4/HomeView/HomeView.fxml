@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s4.HomeView.HomeViewController">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s4.HomeView.HomeViewController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="598.0">
+            <BorderPane prefHeight="296.0" prefWidth="785.0">
                <top>
                   <HBox prefHeight="44.0" prefWidth="598.0" BorderPane.alignment="CENTER">
                      <children>
@@ -36,15 +36,18 @@
                            </HBox.margin>
                         </Button>
                      </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
                   </HBox>
                </top>
                <center>
-                  <VBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="598.0" BorderPane.alignment="CENTER">
+                  <VBox alignment="CENTER_LEFT" prefHeight="207.0" prefWidth="598.0" BorderPane.alignment="CENTER">
                      <children>
                         <HBox prefHeight="18.0" prefWidth="598.0">
                            <children>
                               <ComboBox fx:id="selectYear" prefWidth="150.0" promptText="Select year..." />
-                              <ButtonBar buttonMinWidth="100.0" prefHeight="47.0" prefWidth="267.0">
+                              <ButtonBar buttonMinWidth="100.0" prefHeight="25.0" prefWidth="525.0">
                                 <buttons>
                                   <Button fx:id="editButton" mnemonicParsing="false" onAction="#OnEdit" text="Edit/View" />
                                     <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
@@ -57,7 +60,7 @@
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="147.0" prefWidth="624.0">
                            <children>
                               <Button fx:id="newPlanButton" mnemonicParsing="false" onAction="#OnMakeNewPlan" text="Make New Plan">
                                  <HBox.margin>
@@ -65,8 +68,11 @@
                                  </HBox.margin>
                               </Button>
                               <Button fx:id="newUserButton" mnemonicParsing="false" onAction="#OnAddNewUser" text="Add New User" />
-                              <Button fx:id="seeUserButton" mnemonicParsing="false" onAction="#seeUser" text="See users" translateX="10.0" />
+                              <Button fx:id="seeUserButton" mnemonicParsing="false" onAction="#seeUser" prefHeight="25.0" prefWidth="86.0" text="See users" translateX="10.0" />
                            </children>
+                           <padding>
+                              <Insets left="304.0" />
+                           </padding>
                         </HBox>
                      </children>
                      <BorderPane.margin>
@@ -78,7 +84,7 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <TableView fx:id="planTable" prefHeight="200.0" prefWidth="598.0" />
+            <TableView fx:id="planTable" prefHeight="296.0" prefWidth="785.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>

@@ -1,14 +1,10 @@
 package s4.SetEditStatusView;
 
-import java.util.ArrayList;
-
 import Client.Client;
-import Server.BP_Node;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import s4.Main;
 import s4.ViewInterface;
 
 public class SetEditStatusViewController

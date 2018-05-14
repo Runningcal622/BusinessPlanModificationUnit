@@ -1,9 +1,7 @@
 package GuiTest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,7 +16,6 @@ import Client.Client;
 import Server.BusinessEntity;
 import Server.Server;
 import Server.starter;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
@@ -43,6 +40,7 @@ public class EditViewControllerTest // extend ApplicationTest
 	int level;
 	ArrayList<TreeItem<BusinessEntity>> treeItems;
 	Client client;
+	FxRobot robo =new FxRobot();
 	
 	
 	@Start
@@ -78,12 +76,44 @@ public class EditViewControllerTest // extend ApplicationTest
 	@AfterAll
 	private static void finish()
 	{
-		starter s = new starter(); 
-		s.main(null);
+		starter.main(null);
+	}
+	
+	@Test
+	void please4()
+	{
+		TreeView<BusinessEntity> head = cont.tree;
+		TreeItem<BusinessEntity> topLayer = head.getTreeItem(0);
+		treeItems = new ArrayList<TreeItem<BusinessEntity>>();
+		getAllChildren(topLayer, treeItems);
+		BusinessEntity cur = treeItems.get(treeItems.size()-1).getValue();
+		robo.clickOn(cur.toString());
+		robo.doubleClickOn(cur.getComments().get(cur.getComments().size()-1));
+		robo.write("Hello");
+		robo.type(KeyCode.ENTER);
+		assertEquals("Caleb: Hello" , cur.getComments().get(cur.getComments().size()-1));
+		robo.clickOn(cur.getComments().get(0));
+		robo.clickOn("#addComButton");
+		robo.doubleClickOn(cur.getComments().get(1));
+		robo.write("We should fix the treeview");
+		robo.type(KeyCode.ENTER);
+		robo.clickOn(cur.getComments().get(1));
+		robo.clickOn("#addComButton");
+		robo.doubleClickOn(cur.getComments().get(2));
+		robo.write("No it's good as is");
+		robo.type(KeyCode.ENTER);
+		robo.clickOn(cur.getComments().get(2));
+		robo.clickOn("#addComButton");
+		robo.doubleClickOn(cur.getComments().get(3));
+		robo.write("I vote we fix it too");
+		robo.type(KeyCode.ENTER);
+
+
+
 	}
 
 	@Test
-	public void please(FxRobot robo)
+	public void please()
 	{
 		// assertThat();
 		// stage.getScene().getRoot();
@@ -101,11 +131,10 @@ public class EditViewControllerTest // extend ApplicationTest
 			if (cont.textArea.isVisible())
 			{
 				// change the statement
-				testChangestatement(robo);
+				testChangestatement();
 			}
 		}
 		int sizeOfArray = treeItems.size();
-		TreeItem toolItem = treeItems.get(treeItems.size() - 1);
 		String tool = treeItems.get(treeItems.size() - 1).getValue().toString();
 		robo.clickOn(tool);
 		robo.clickOn("#delCompButton");
@@ -126,7 +155,7 @@ public class EditViewControllerTest // extend ApplicationTest
 	}
 
 	@Test
-	public void please2(FxRobot robo)
+	public void please2()
 	{
 
 		TreeItem<BusinessEntity> topLayer = cont.tree.getTreeItem(0);
@@ -139,8 +168,9 @@ public class EditViewControllerTest // extend ApplicationTest
 			id = item.getValue().toString();
 			level = item.getValue().getTree_level();
 			robo.clickOn(item.getValue().toString());
-			changeEntityTitle(robo);
+			changeEntityTitle();
 		}
+		starter.main(null);
 	}
 ////
 	
@@ -149,7 +179,7 @@ public class EditViewControllerTest // extend ApplicationTest
 	 * test add and delete
 	 */
 	@Test
-	public void please3(FxRobot robo)
+	public void please3()
 	{
 		treeItems = new ArrayList<TreeItem<BusinessEntity>>();
 		getAllChildren(cont.tree.getTreeItem(0), treeItems);
@@ -171,10 +201,11 @@ public class EditViewControllerTest // extend ApplicationTest
 				robo.clickOn("#delCompButton");
 			}
 		}
+		client.proxy.writeDisk();
 		
 	}
 
-	private void changeEntityTitle(FxRobot robo)
+	private void changeEntityTitle()
 	{
 		String s = cont.entityTitleField.getText();
 		if (s.length() != 0)
@@ -228,7 +259,7 @@ public class EditViewControllerTest // extend ApplicationTest
 	}
 
 	@Test
-	public void testChangestatement(FxRobot robo)
+	public void testChangestatement()
 	{
 		String s = cont.textArea.getText();
 		if (s.length() != 0)

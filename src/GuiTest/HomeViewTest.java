@@ -50,8 +50,7 @@ public class HomeViewTest implements ViewInterface // extend ApplicationTest
 	@BeforeAll
 	public static void StartemUp()
 	{
-		starter s =new starter();
-		s.main(null);
+		starter.main(null);
 	}
 
 	@Start

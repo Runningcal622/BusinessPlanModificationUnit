@@ -2,11 +2,17 @@ package businessPlanTools.tests;
 
 import java.util.ArrayList;
 
-import Server.*;
+import Server.EntityFactory;
+import Server.EntityStatement;
 
 //This exists purely so that we can test the purely the EntityFactory
 public class MockEntityFactory extends EntityFactory
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5414430206612594817L;
+
 	public MockEntityFactory(String[] layers)
 	{
 		super(layers);

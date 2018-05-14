@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javafx.scene.control.TreeView;
-
 public class BusinessEntity implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +32,7 @@ public class BusinessEntity implements Serializable
 		component_number = 1;
 		this.sentence = statements.get(0).getStatement();
 		this.comments = new ArrayList<String>();
+		this.comments.add("Starting Comment");
 	}
 
 	/**
